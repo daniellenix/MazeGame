@@ -68,7 +68,7 @@ public class RecursiveBackTracker {
                     exploredSpaces.push(randomCell);
                     currentCell = new Cell(randomCell);
                 }
-            }
+            }   
             exploredSpaces.pop();
         }
     }
