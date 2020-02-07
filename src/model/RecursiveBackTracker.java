@@ -6,6 +6,7 @@ import java.util.Stack;
 public class RecursiveBackTracker {
 
     private final int WALL_NOT_SHOWN = 3;
+    private final int WALL_SHOWN = 4;
     private final int SPACE_NOT_SHOWN = 6;
     private int[][] maze = new int[20][15];
     private Stack<Cell> exploredSpaces = new Stack<>();
@@ -14,11 +15,14 @@ public class RecursiveBackTracker {
 
     public void makeMaze(){
         exploredSpaces.push(initialCell);
+    }
+
+    public void setOutsideWalls() {
 
     }
 
-    public boolean isNeighbour() {
-        return true;
+    public boolean hasValidNeighbour(Cell cell) {
+    return true;
     }
 
     public boolean isVisited(Cell coord) {
