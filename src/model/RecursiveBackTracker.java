@@ -3,15 +3,19 @@ package model;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class RecursiveBacktracker {
+public class RecursiveBackTracker {
 
     private final int WALL_NOT_SHOWN = 3;
     private final int SPACE_NOT_SHOWN = 6;
     private int[][] maze = new int[20][15];
-    private Stack exploredSpaces;
-    private int[][] initialCell = new int[0][0];
+    private Stack<Cell> exploredSpaces = new Stack<>();
+    private Cell initialCell = new Cell(0,0);
     private ArrayList<Cell> neighbours = new ArrayList<>();
-    private final int SPACENOTSHOWN = 6;
+
+    public void makeMaze(){
+        exploredSpaces.push(initialCell);
+
+    }
 
     public boolean isNeighbour() {
         return true;
