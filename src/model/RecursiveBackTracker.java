@@ -5,6 +5,9 @@ import java.util.Stack;
 
 public class RecursiveBackTracker {
 
+    private final int MOUSE = 0;
+    private final int CHEESE = 1;
+    private final int CAT = 2;
     private final int WALL_NOT_SHOWN = 3;
     private final int WALL_SHOWN = 4;
     private final int SPACE_NOT_SHOWN = 6;
@@ -30,6 +33,7 @@ public class RecursiveBackTracker {
     }
 
     public void setInitialMaze() {
+
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 15; j++) {
                 maze[i][j] = WALL_NOT_SHOWN;
@@ -47,14 +51,56 @@ public class RecursiveBackTracker {
     }
 
     public boolean hasValidNeighbour(Cell cell) {
-        return true;
+        //north
+        Cell upCell = cell.getUp(cell);
+        if(maze[upCell.getRow()][upCell.getColumn()] == WALL_NOT_SHOWN){
+            return true;
+        }
+        //down
+        Cell downCell = cell.getDown(cell);
+        if (maze[downCell.getRow()][downCell.getColumn()] == WALL_NOT_SHOWN){
+            return true;
+        }
+        //left
+        Cell leftCell = cell.getLeft(cell);
+        if(maze[leftCell.getRow()][leftCell.getColumn()] == WALL_NOT_SHOWN){
+            return true;
+        }
+        //right
+        Cell rightCell = cell.getRight(cell);
+        if(maze[rightCell.getRow()][rightCell.getColumn()] == WALL_NOT_SHOWN){
+            return true;
+        }
+        return false;
     }
 
     public boolean isVisited(Cell coord) {
         return true;
     }
 
-    public void findNeighbours(Cell coord) {
+    public void findNeighbours(Cell cell) {
+        neighbours.clear();
+
+        Cell upCell = cell.getUp(cell);
+        if(maze[upCell.getRow()][upCell.getColumn()] == WALL_NOT_SHOWN){
+            neighbours.add(upCell);
+        }
+        //down
+        Cell downCell = cell.getDown(cell);
+        if (maze[downCell.getRow()][downCell.getColumn()] == WALL_NOT_SHOWN){
+            neighbours.add(downCell);
+        }
+        //left
+        Cell leftCell = cell.getLeft(cell);
+        if(maze[leftCell.getRow()][leftCell.getColumn()] == WALL_NOT_SHOWN){
+            neighbours.add(leftCell);
+        }
+        //right
+        Cell rightCell = cell.getRight(cell);
+        if(maze[rightCell.getRow()][rightCell.getColumn()] == WALL_NOT_SHOWN){
+            neighbours.add(rightCell);
+        }
+
     }
 
     public boolean isValidToDelete(Cell coord) {
