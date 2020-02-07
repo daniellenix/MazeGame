@@ -63,7 +63,12 @@ public class RecursiveBackTracker {
     }
 
     public boolean isValidToDelete(Cell coord) {
-        return true;
+
+        if(!isVisited(coord)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void deleteWall(Cell coord) {
