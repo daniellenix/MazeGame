@@ -51,7 +51,12 @@ public class RecursiveBackTracker {
     }
 
     public boolean isVisited(Cell coord) {
-        return true;
+
+        if(coord.getRow() == SPACE_NOT_SHOWN && coord.getColumn() == SPACE_NOT_SHOWN) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void findNeighbours(Cell coord) {
