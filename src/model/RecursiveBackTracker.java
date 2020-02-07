@@ -17,8 +17,16 @@ public class RecursiveBackTracker {
         exploredSpaces.push(initialCell);
     }
 
-    public void setOutsideWalls() {
+    public void setOutsideWalls(int[][] maze) {
+        for (int i = 0; i < maze.length; i++) {
+            maze[0][i] = WALL_SHOWN;
+            maze[20][i] = WALL_SHOWN;
+        }
 
+        for (int i = 0; i < maze.length; i++) {
+            maze[i][0] = WALL_SHOWN;
+            maze[i][15] = WALL_SHOWN;
+        }
     }
 
     public boolean hasValidNeighbour(Cell cell) {
