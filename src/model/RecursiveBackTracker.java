@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Stack;
 
 public class RecursiveBackTracker {
@@ -69,12 +70,10 @@ public class RecursiveBackTracker {
         }
     }
 
-    public void deleteWall(Cell coord) {
-        maze[coord.getRow()][coord.getColumn()] = SPACE_NOT_SHOWN;
-    }
-
-    public void chooseRandomSpace(ArrayList<Cell> neighbours) {
-    }
+//    public void chooseRandomSpace(ArrayList<Cell> neighbours)
+//        Random random = new Random();
+//        neighbours.get( random.nextInt(neighbours.size())
+//    }
 
     public void makeIsland() {
     }
