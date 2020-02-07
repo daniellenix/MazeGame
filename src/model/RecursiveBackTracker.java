@@ -15,6 +15,7 @@ public class RecursiveBackTracker {
 
     public void makeMaze(){
         exploredSpaces.push(initialCell);
+
     }
 
     public void setOutsideWalls() {
@@ -22,7 +23,7 @@ public class RecursiveBackTracker {
     }
 
     public boolean hasValidNeighbour(Cell cell) {
-    return true;
+        return true;
     }
 
     public boolean isVisited(Cell coord) {
