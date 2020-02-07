@@ -14,7 +14,7 @@ public class RecursiveBackTracker {
     private final int SPACE_NOT_SHOWN = 6;
     private static int[][] maze = new int[20][15];
     private Stack<Cell> exploredSpaces = new Stack<>();
-    private Cell initialCell = new Cell(0,0);
+    private Cell initialCell = new Cell(1,1);
     private ArrayList<Cell> neighbours = new ArrayList<>();
 
     public static void main(String[] args) {
