@@ -33,4 +33,22 @@ public class Cell {
     public Cell goRight(Cell oldCell) {
         return new Cell(oldCell.column + 1, oldCell.column);
     }
+
+    public Cell getUp(Cell currentCell) {
+        return new Cell(currentCell.row - 1, currentCell.column);
+    }
+
+    public Cell getDown(Cell currentCell) {
+        return new Cell(currentCell.row + 1, currentCell.column);
+    }
+
+    public Cell getLeft(Cell currentCell) {
+        return new Cell(currentCell.row, currentCell.column - 1);
+    }
+
+    public Cell getRight(Cell currentCell) {
+        return new Cell(currentCell.row, currentCell.column + 1);
+    }
+
+
 }
