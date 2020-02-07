@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class RecursiveBacktracker {
+
+    private final int WALL_NOT_SHOWN = 3;
+    private final int SPACE_NOT_SHOWN = 6;
     private int[][] maze = new int[20][15];
-    private final int WALLNOTSHOWN = 3;
     private Stack exploredSpaces;
     private int[][] initialCell = new int[0][0];
     private ArrayList<String> neighbours = new ArrayList<>();
-    private final int SPACENOTSHOWN = 6;
 
     public boolean isNeighbour() {
         return true;

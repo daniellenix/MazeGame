@@ -20,12 +20,4 @@ public class Mouse {
     public boolean isValidMove (String userInput, String mouseCoord) {
         return true;
     }
-
-    public int getRowInt(String userInput) {
-        return 0;
-    }
-
-    public int getColumnInt(String userInput) {
-        return 0;
-    }
 }
