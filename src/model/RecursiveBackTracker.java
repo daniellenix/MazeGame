@@ -15,7 +15,7 @@ public class RecursiveBackTracker {
 
     public static void main(String[] args) {
         RecursiveBackTracker m = new RecursiveBackTracker();
-        m.setOutsideWalls();
+        m.setInitialMaze();
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 15; j++) {
                 System.out.print(maze[i][j]);
@@ -29,7 +29,13 @@ public class RecursiveBackTracker {
 
     }
 
-    public void setOutsideWalls() {
+    public void setInitialMaze() {
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 15; j++) {
+                maze[i][j] = WALL_NOT_SHOWN;
+            }
+        }
+
         for (int i = 0; i < 15; i++) {
             maze[0][i] = WALL_SHOWN;
             maze[19][i] = WALL_SHOWN;
