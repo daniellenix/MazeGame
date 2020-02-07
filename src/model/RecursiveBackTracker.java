@@ -34,13 +34,11 @@ public class RecursiveBackTracker {
     }
 
     public void setInitialMaze() {
-
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 15; j++) {
                 maze[i][j] = WALL_NOT_SHOWN;
             }
         }
-
         for (int i = 0; i < 15; i++) {
             maze[0][i] = WALL_SHOWN;
             maze[19][i] = WALL_SHOWN;
@@ -52,7 +50,7 @@ public class RecursiveBackTracker {
     }
 
     public boolean hasValidNeighbour(Cell cell) {
-        //north
+        //up
         Cell upCell = cell.getUp(cell);
         if(maze[upCell.getRow()][upCell.getColumn()] == WALL_NOT_SHOWN){
             return true;
@@ -86,6 +84,7 @@ public class RecursiveBackTracker {
     public void findNeighbours(Cell cell) {
         neighbours.clear();
 
+        //up
         Cell upCell = cell.getUp(cell);
         if(maze[upCell.getRow()][upCell.getColumn()] == WALL_NOT_SHOWN){
             neighbours.add(upCell);
