@@ -7,15 +7,15 @@ public class InputTokens {
     private final int CHEESE = 1;
     private final int CAT = 2;
 
-    private String mousePosition;
-    private String cheesePosition;
-    private ArrayList<String> catPositions;
+    private Cell mousePosition;
+    private Cell cheesePosition;
+    private ArrayList<Cell> catPositions;
 
-    public String putCheese(int[][] maze) {
+    public Cell putCheese(int[][] maze) {
         return null;
     }
 
-    public String putCat(int[][] maze){
+    public Cell putCat(int[][] maze){
         return null;
     }
 
