@@ -75,7 +75,11 @@ public class RecursiveBackTracker {
     }
 
     public boolean isVisited(Cell coord) {
-        return true;
+        if(coord.getRow() == SPACE_NOT_SHOWN && coord.getColumn() == SPACE_NOT_SHOWN) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void findNeighbours(Cell cell) {
@@ -104,10 +108,15 @@ public class RecursiveBackTracker {
     }
 
     public boolean isValidToDelete(Cell coord) {
-        return true;
+        if(!isVisited(coord)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void deleteWall(Cell coord) {
+        maze[coord.getRow()][coord.getColumn()] = SPACE_NOT_SHOWN;
     }
 
     public void chooseRandomSpace(ArrayList<Cell> neighbours) {
