@@ -30,7 +30,6 @@ public class RecursiveBackTracker {
 
     public void makeMaze(){
         exploredSpaces.push(initialCell);
-
     }
 
     public void setInitialMaze() {
@@ -115,9 +114,9 @@ public class RecursiveBackTracker {
         }
     }
 
-    public void chooseRandomSpace(ArrayList<Cell> neighbours) {
+    public void chooseRandomNeighbour(ArrayList<Cell> neighbours) {
         Random random = new Random();
-        Cell delete = neighbours.get(random.nextInt(neighbours.size());
+        Cell delete = neighbours.get(random.nextInt(neighbours.size()));
         maze[delete.getRow()][delete.getColumn()] = SPACE_NOT_SHOWN;
     }
 
