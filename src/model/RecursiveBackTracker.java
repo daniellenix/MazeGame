@@ -30,12 +30,15 @@ public class RecursiveBackTracker {
     public void makeMaze(){
         Cell currentCell = new Cell(1,1);
         exploredSpaces.push(currentCell);
-
-        while(hasValidNeighbour(currentCell)) {
-            findNeighbours(currentCell);
-            if(isValidToDelete(chooseRandomNeighbour(neighbours))) {
-                deleteNeighbour(chooseRandomNeighbour(neighbours));
+        
+        while(!exploredSpaces.empty()) {
+            while(hasValidNeighbour(currentCell)) {
+                findNeighbours(currentCell);
+                if(isValidToDelete(chooseRandomNeighbour(neighbours))) {
+                    deleteNeighbour(chooseRandomNeighbour(neighbours));
+                }
             }
+            exploredSpaces.pop();
         }
     }
 
