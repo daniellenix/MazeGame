@@ -14,7 +14,6 @@ public class RecursiveBackTracker {
     private final int SPACE_NOT_SHOWN = 6;
     private static int[][] maze = new int[20][15];
     private Stack<Cell> exploredSpaces = new Stack<>();
-    private Cell initialCell = new Cell(1,1);
     private ArrayList<Cell> neighbours = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -29,7 +28,15 @@ public class RecursiveBackTracker {
     }
 
     public void makeMaze(){
-        exploredSpaces.push(initialCell);
+        Cell currentCell = new Cell(1,1);
+        exploredSpaces.push(currentCell);
+
+        while(hasValidNeighbour(currentCell)) {
+            findNeighbours(currentCell);
+            if(isValidToDelete(chooseRandomNeighbour(neighbours))) {
+                deleteNeighbour(chooseRandomNeighbour(neighbours));
+            }
+        }
     }
 
     public void setInitialMaze() {
@@ -114,10 +121,13 @@ public class RecursiveBackTracker {
         }
     }
 
-    public void chooseRandomNeighbour(ArrayList<Cell> neighbours) {
+    public Cell chooseRandomNeighbour(ArrayList<Cell> neighbours) {
         Random random = new Random();
-        Cell delete = neighbours.get(random.nextInt(neighbours.size()));
-        maze[delete.getRow()][delete.getColumn()] = SPACE_NOT_SHOWN;
+        return neighbours.get(random.nextInt(neighbours.size()));
+    }
+
+    public void deleteNeighbour(Cell coord) {
+        maze[coord.getRow()][coord.getColumn()] = SPACE_NOT_SHOWN;
     }
 
     public void makeIsland() {
