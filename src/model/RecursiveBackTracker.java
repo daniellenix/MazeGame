@@ -115,10 +115,11 @@ public class RecursiveBackTracker {
         }
     }
 
-//    public void chooseRandomSpace(ArrayList<Cell> neighbours)
-//        Random random = new Random();
-//        neighbours.get( random.nextInt(neighbours.size())
-//    }
+    public void chooseRandomSpace(ArrayList<Cell> neighbours) {
+        Random random = new Random();
+        Cell delete = neighbours.get(random.nextInt(neighbours.size());
+        maze[delete.getRow()][delete.getColumn()] = SPACE_NOT_SHOWN;
+    }
 
     public void makeIsland() {
     }
