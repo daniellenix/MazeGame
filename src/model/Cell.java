@@ -55,5 +55,11 @@ public class Cell {
         return new Cell(currentCell.row, currentCell.column + 1);
     }
 
-
+    @Override
+    public String toString() {
+        return "Cell{" +
+                "row=" + row +
+                ", column=" + column +
+                '}';
+    }
 }
