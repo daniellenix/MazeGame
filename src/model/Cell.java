@@ -5,6 +5,11 @@ public class Cell {
     private int row;
     private int column;
 
+    public Cell (Cell cell) {
+        this.row = cell.row;
+        this.column = cell.column;
+    }
+
     public int getRow() {
         return row;
     }

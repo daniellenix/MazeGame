@@ -18,7 +18,7 @@ public class RecursiveBackTracker {
 
     public static void main(String[] args) {
         RecursiveBackTracker m = new RecursiveBackTracker();
-        m.setInitialMaze();
+        m.makeMaze();
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 15; j++) {
                 System.out.print(maze[i][j]);
@@ -28,14 +28,21 @@ public class RecursiveBackTracker {
     }
 
     public void makeMaze(){
+        RecursiveBackTracker m = new RecursiveBackTracker();
+        m.setInitialMaze();
+
         Cell currentCell = new Cell(1,1);
+        maze[1][1] = SPACE_NOT_SHOWN;
         exploredSpaces.push(currentCell);
-        
+
         while(!exploredSpaces.empty()) {
             while(hasValidNeighbour(currentCell)) {
                 findNeighbours(currentCell);
-                if(isValidToDelete(chooseRandomNeighbour(neighbours))) {
-                    deleteNeighbour(chooseRandomNeighbour(neighbours));
+                Cell randomCell = chooseRandomNeighbour(neighbours);
+                if(isValidToDelete(randomCell)) {
+                    deleteNeighbour(randomCell);
+                    exploredSpaces.push(randomCell);
+                    currentCell = new Cell(randomCell);
                 }
             }
             exploredSpaces.pop();
