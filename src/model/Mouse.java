@@ -1,23 +1,10 @@
 package model;
 
 public class Mouse {
-    public String moveUp (String mouseCoord) {
-        return null;
-    }
+    public void moveMouse() {
 
-    public String moveDown (String mouseCoord) {
-        return null;
     }
-
-    public String moveRight (String mouseCoord) {
-        return null;
-    }
-
-    public String moveLeft (String mouseCoord) {
-        return null;
-    }
-
-    public boolean isValidMove (String userInput, String mouseCoord) {
+    public boolean isValidMove (String userInput, Cell mouseCoord) {
         return true;
     }
 }
