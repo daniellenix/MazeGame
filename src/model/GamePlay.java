@@ -3,15 +3,14 @@ package model;
 import java.util.ArrayList;
 
 public class GamePlay {
-    public boolean didMouseGetCheese(String cheesePosition, String mousePosition){
+    public boolean didMouseGetCheese(Cell cheesePosition, Cell mousePosition){
         return true;
     }
 
-    public boolean didCatGetMouse(ArrayList<String> catPositions, String mousePosition){
+    public boolean didCatGetMouse(ArrayList<Cell> catPositions, Cell mousePosition){
         return true;
     }
 
     GamePlay(){
-
     }
 }
