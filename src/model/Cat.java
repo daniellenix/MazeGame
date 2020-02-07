@@ -3,9 +3,9 @@ package model;
 import java.util.ArrayList;
 
 public class Cat {
-    private ArrayList<String> emptySpaces = new ArrayList<>();
+    private ArrayList<Cell> emptySpaces = new ArrayList<>();
 
-    public boolean isEmptySpace(int[][] maze, String catCoord){
+    public boolean isEmptySpace(int[][] maze, Cell catCoord){
         return true;
     }
 
@@ -13,7 +13,7 @@ public class Cat {
 
     }
 
-    public String pickRandomSpace (ArrayList<String> emptySpaces) {
+    public String pickRandomSpace (ArrayList<Cell> emptySpaces) {
         return null;
     }
 }
