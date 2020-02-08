@@ -6,12 +6,16 @@ import java.util.Stack;
 
 public class RecursiveBackTracker {
 
+    //merge the commits
+    //look at the numbering
+    //make enums
     private final int MOUSE = 0;
     private final int CHEESE = 1;
     private final int CAT = 2;
     private final int WALL_NOT_SHOWN = 3;
     private final int WALL_SHOWN = 4;
     private final int SPACE_NOT_SHOWN = 6;
+    //final variables for row and col
     private static int[][] maze = new int[20][15];
     private Stack<Cell> exploredSpaces = new Stack<>();
     private ArrayList<Cell> neighbours = new ArrayList<>();
@@ -31,7 +35,7 @@ public class RecursiveBackTracker {
         RecursiveBackTracker m = new RecursiveBackTracker();
         m.setInitialMaze();
 
-        int visitedCellsCounter = 0;
+//        int visitedCellsCounter = 0;
 //        Cell currentCell = new Cell(1,1);
 //        maze[1][1] = SPACE_NOT_SHOWN;
 //        visitedCellsCounter++;
