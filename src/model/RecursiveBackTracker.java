@@ -6,12 +6,16 @@ import java.util.Stack;
 
 public class RecursiveBackTracker {
 
+    //merge the commits
+    //look at the numbering
+    //make enums
     private final int MOUSE = 0;
     private final int CHEESE = 1;
     private final int CAT = 2;
     private final int WALL_NOT_SHOWN = 3;
     private final int WALL_SHOWN = 4;
     private final int SPACE_NOT_SHOWN = 6;
+    //final variables for row and col
     private static int[][] maze = new int[20][15];
     private Stack<Cell> exploredSpaces = new Stack<>();
     private ArrayList<Cell> neighbours = new ArrayList<>();
@@ -31,6 +35,7 @@ public class RecursiveBackTracker {
         RecursiveBackTracker m = new RecursiveBackTracker();
         m.setInitialMaze();
 
+//        int visitedCellsCounter = 0;
 //        Cell currentCell = new Cell(1,1);
 //        maze[1][1] = SPACE_NOT_SHOWN;
 //        visitedCellsCounter++;
@@ -50,25 +55,25 @@ public class RecursiveBackTracker {
 //                currentCell = poppedCell;
 //            }
 //        }
-
-        Cell currentCell = new Cell(1,1);
-        maze[1][1] = SPACE_NOT_SHOWN;
-        exploredSpaces.push(currentCell);
-
-        while(!exploredSpaces.empty()) {
-            if(hasValidNeighbour(currentCell)) {
-                findNeighbours(currentCell);
-                Cell randomCell = chooseRandomNeighbour(neighbours);
-//                if(isValidToDelete(randomCell)) {
-                deleteNeighbour(randomCell);
-                exploredSpaces.push(randomCell);
-                currentCell = new Cell(randomCell);
-//                }
-            }
-            Cell poppedCell = exploredSpaces.pop();
-            currentCell = poppedCell;
-        }
 //
+//        Cell currentCell = new Cell(1,1);
+//        maze[1][1] = SPACE_NOT_SHOWN;
+//        exploredSpaces.push(currentCell);
+//
+//        while(!exploredSpaces.empty()) {
+//            if(hasValidNeighbour(currentCell)) {
+//                findNeighbours(currentCell);
+//                Cell randomCell = chooseRandomNeighbour(neighbours);
+////                if(isValidToDelete(randomCell)) {
+//                deleteNeighbour(randomCell);
+//                exploredSpaces.push(randomCell);
+//                currentCell = new Cell(randomCell);
+////                }
+//            }
+//            Cell poppedCell = exploredSpaces.pop();
+//            currentCell = poppedCell;
+//        }
+////
 //        Cell currentCell = new Cell(1,1);
 //        maze[1][1] = SPACE_NOT_SHOWN;
 //        exploredSpaces.push(currentCell);
@@ -90,7 +95,7 @@ public class RecursiveBackTracker {
     public void setInitialMaze() {
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 15; j++) {
-                maze[i][j] = WALL_SHOWN;
+                maze[i][j] = WALL_NOT_SHOWN;
             }
         }
         for (int i = 0; i < 15; i++) {
