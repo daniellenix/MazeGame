@@ -30,71 +30,60 @@ public class RecursiveBackTracker {
         }
     }
 
-    public void makeMaze(){
+    public void makeMaze() {
         RecursiveBackTracker m = new RecursiveBackTracker();
         m.setInitialMaze();
 
-//        int visitedCellsCounter = 0;
-//        Cell currentCell = new Cell(1,1);
-//        maze[1][1] = SPACE_NOT_SHOWN;
-//        visitedCellsCounter++;
-//        exploredSpaces.push(currentCell);
-//
-//        while(!exploredSpaces.empty()) {
-//            if(hasValidNeighbour(currentCell)) {
-//                findNeighbours(currentCell);
-//                Cell randomCell = chooseRandomNeighbour(neighbours);
-////                exploredSpaces.push(currentCell);
-//                deleteNeighbour(randomCell);
-//                exploredSpaces.push(randomCell);
-//                currentCell = new Cell(randomCell);
-//                visitedCellsCounter++;
-//            } else if(!exploredSpaces.empty()){
-//                Cell poppedCell = exploredSpaces.pop();
-//                currentCell = poppedCell;
-//            }
-//        }
-
-        Cell currentCell = new Cell(1,1);
+        Cell currentCell = new Cell(1, 1);
         maze[1][1] = SPACE_NOT_SHOWN;
-        exploredSpaces.push(currentCell);
+//        exploredSpaces.push(currentCell);
 
-        while(!exploredSpaces.empty()) {
-            if(hasValidNeighbour(currentCell)) {
+        while (hasUnexploredSpaces()) {
+            if (hasValidNeighbour(currentCell)) {
                 findNeighbours(currentCell);
                 Cell randomCell = chooseRandomNeighbour(neighbours);
-//                if(isValidToDelete(randomCell)) {
-                deleteNeighbour(randomCell);
+                addSpace(randomCell);
+                currentCell = randomCell;
                 exploredSpaces.push(randomCell);
-                currentCell = new Cell(randomCell);
-//                }
+                neighbours.remove(randomCell);
+                addWall();
+            } else if (!exploredSpaces.empty()) {
+                Cell poppedCell = exploredSpaces.pop();
+                currentCell = poppedCell;
+            } else {
+                currentCell = getUnexploredSpaces();
             }
-            Cell poppedCell = exploredSpaces.pop();
-            currentCell = poppedCell;
         }
-//
-//        Cell currentCell = new Cell(1,1);
-//        maze[1][1] = SPACE_NOT_SHOWN;
-//        exploredSpaces.push(currentCell);
 
-//        while(!exploredSpaces.empty()) {
-//            while(hasValidNeighbour(currentCell)) {
-//                findNeighbours(currentCell);
-//                Cell randomCell = chooseRandomNeighbour(neighbours);
-////                if(isValidToDelete(randomCell)) {
-//                    deleteNeighbour(randomCell);
-//                    exploredSpaces.push(randomCell);
-//                    currentCell = new Cell(randomCell);
-////                }  
-//            }
-//            exploredSpaces.pop();
-//        }
+    }
+
+    public boolean hasUnexploredSpaces() {
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 15; j++) {
+                if(maze[i][j] == UNEXPLORED_SPACE) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public Cell getUnexploredSpaces() {
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 15; j++) {
+                if(maze[i][j] == UNEXPLORED_SPACE) {
+                    return new Cell(i, j);
+                }
+            }
+        }
+        return null;
     }
 
     public void setInitialMaze() {
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 15; j++) {
-                maze[i][j] = WALL_NOT_SHOWN;
+                maze[i][j] = UNEXPLORED_SPACE;
             }
         }
         for (int i = 0; i < 15; i++) {
@@ -105,27 +94,31 @@ public class RecursiveBackTracker {
             maze[i][0] = WALL_SHOWN;
             maze[i][COLUMN - 1] = WALL_SHOWN;
         }
+
+        maze[18][1] = SPACE_NOT_SHOWN;
+        maze[18][13] = SPACE_NOT_SHOWN;
+        maze[1][13] = SPACE_NOT_SHOWN;
     }
 
     public boolean hasValidNeighbour(Cell cell) {
         //up
         Cell upCell = cell.getUp(cell);
-        if(maze[upCell.getRow()][upCell.getColumn()] == WALL_NOT_SHOWN){
+        if(maze[upCell.getRow()][upCell.getColumn()] == UNEXPLORED_SPACE){
             return true;
         }
         //down
         Cell downCell = cell.getDown(cell);
-        if (maze[downCell.getRow()][downCell.getColumn()] == WALL_NOT_SHOWN){
+        if (maze[downCell.getRow()][downCell.getColumn()] == UNEXPLORED_SPACE){
             return true;
         }
         //left
         Cell leftCell = cell.getLeft(cell);
-        if(maze[leftCell.getRow()][leftCell.getColumn()] == WALL_NOT_SHOWN){
+        if(maze[leftCell.getRow()][leftCell.getColumn()] == UNEXPLORED_SPACE){
             return true;
         }
         //right
         Cell rightCell = cell.getRight(cell);
-        if(maze[rightCell.getRow()][rightCell.getColumn()] == WALL_NOT_SHOWN){
+        if(maze[rightCell.getRow()][rightCell.getColumn()] == UNEXPLORED_SPACE){
             return true;
         }
         return false;
@@ -144,43 +137,46 @@ public class RecursiveBackTracker {
 
         //up
         Cell upCell = cell.getUp(cell);
-        if(maze[upCell.getRow()][upCell.getColumn()] == WALL_NOT_SHOWN){
+        if(maze[upCell.getRow()][upCell.getColumn()] == UNEXPLORED_SPACE){
             neighbours.add(upCell);
         }
         //down
         Cell downCell = cell.getDown(cell);
-        if (maze[downCell.getRow()][downCell.getColumn()] == WALL_NOT_SHOWN){
+        if (maze[downCell.getRow()][downCell.getColumn()] == UNEXPLORED_SPACE){
             neighbours.add(downCell);
         }
         //left
         Cell leftCell = cell.getLeft(cell);
-        if(maze[leftCell.getRow()][leftCell.getColumn()] == WALL_NOT_SHOWN){
+        if(maze[leftCell.getRow()][leftCell.getColumn()] == UNEXPLORED_SPACE){
             neighbours.add(leftCell);
         }
         //right
         Cell rightCell = cell.getRight(cell);
-        if(maze[rightCell.getRow()][rightCell.getColumn()] == WALL_NOT_SHOWN){
+        if(maze[rightCell.getRow()][rightCell.getColumn()] == UNEXPLORED_SPACE){
             neighbours.add(rightCell);
         }
 
     }
-
-//    public boolean isValidToDelete(Cell coord) {
-//        if(!isVisited(coord)) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
 
     public Cell chooseRandomNeighbour(ArrayList<Cell> neighbours) {
         Random random = new Random();
         return neighbours.get(random.nextInt(neighbours.size()));
     }
 
-    public void deleteNeighbour(Cell coord) {
+    public void addSpace(Cell coord) {
         maze[coord.getRow()][coord.getColumn()] = SPACE_NOT_SHOWN;
     }
+
+    public void addWall(Cell coord) {
+        maze[coord.getRow()][coord.getColumn()] = WALL_NOT_SHOWN;
+    }
+
+    public void addWall() {
+        for (Cell neighbour : neighbours) {
+            addWall(neighbour);
+        }
+    }
+
 
     public void makeIsland() {
     }
