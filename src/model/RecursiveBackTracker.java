@@ -6,13 +6,16 @@ import java.util.Stack;
 
 public class RecursiveBackTracker {
 
-    private final int MOUSE = 0;
+    private final int UNEXPLORED_SPACE = 0;
     private final int CHEESE = 1;
     private final int CAT = 2;
     private final int WALL_NOT_SHOWN = 3;
     private final int WALL_SHOWN = 4;
     private final int SPACE_NOT_SHOWN = 6;
-    private static int[][] maze = new int[20][15];
+    private final int MOUSE = 7;
+    private static final int ROW = 20;
+    private static final int COLUMN = 15;
+    private static int[][] maze = new int[ROW][COLUMN];
     private Stack<Cell> exploredSpaces = new Stack<>();
     private ArrayList<Cell> neighbours = new ArrayList<>();
 
@@ -31,7 +34,7 @@ public class RecursiveBackTracker {
         RecursiveBackTracker m = new RecursiveBackTracker();
         m.setInitialMaze();
 
-        int visitedCellsCounter = 0;
+//        int visitedCellsCounter = 0;
 //        Cell currentCell = new Cell(1,1);
 //        maze[1][1] = SPACE_NOT_SHOWN;
 //        visitedCellsCounter++;
@@ -96,11 +99,11 @@ public class RecursiveBackTracker {
         }
         for (int i = 0; i < 15; i++) {
             maze[0][i] = WALL_SHOWN;
-            maze[19][i] = WALL_SHOWN;
+            maze[ROW - 1][i] = WALL_SHOWN;
         }
         for (int i = 0; i < 20; i++) {
             maze[i][0] = WALL_SHOWN;
-            maze[i][14] = WALL_SHOWN;
+            maze[i][COLUMN - 1] = WALL_SHOWN;
         }
     }
 
