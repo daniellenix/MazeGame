@@ -31,7 +31,6 @@ public class RecursiveBackTracker {
         RecursiveBackTracker m = new RecursiveBackTracker();
         m.setInitialMaze();
 
-        int visitedCellsCounter = 0;
 //        Cell currentCell = new Cell(1,1);
 //        maze[1][1] = SPACE_NOT_SHOWN;
 //        visitedCellsCounter++;
@@ -91,7 +90,7 @@ public class RecursiveBackTracker {
     public void setInitialMaze() {
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 15; j++) {
-                maze[i][j] = WALL_NOT_SHOWN;
+                maze[i][j] = WALL_SHOWN;
             }
         }
         for (int i = 0; i < 15; i++) {
