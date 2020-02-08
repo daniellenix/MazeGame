@@ -12,6 +12,7 @@ public class RecursiveBackTracker {
     private final int WALL_NOT_SHOWN = 3;
     private final int WALL_SHOWN = 4;
     private final int SPACE_NOT_SHOWN = 6;
+    private final int VISITED = 10;
     private static int[][] maze = new int[20][15];
     private Stack<Cell> exploredSpaces = new Stack<>();
     private ArrayList<Cell> neighbours = new ArrayList<>();
@@ -31,61 +32,35 @@ public class RecursiveBackTracker {
         RecursiveBackTracker m = new RecursiveBackTracker();
         m.setInitialMaze();
 
-        int visitedCellsCounter = 0;
 //        Cell currentCell = new Cell(1,1);
 //        maze[1][1] = SPACE_NOT_SHOWN;
-//        visitedCellsCounter++;
 //        exploredSpaces.push(currentCell);
-//
+
 //        while(!exploredSpaces.empty()) {
 //            if(hasValidNeighbour(currentCell)) {
 //                findNeighbours(currentCell);
 //                Cell randomCell = chooseRandomNeighbour(neighbours);
-////                exploredSpaces.push(currentCell);
+//                if(isValidToDelete(randomCell)) {
 //                deleteNeighbour(randomCell);
 //                exploredSpaces.push(randomCell);
 //                currentCell = new Cell(randomCell);
-//                visitedCellsCounter++;
-//            } else if(!exploredSpaces.empty()){
-//                Cell poppedCell = exploredSpaces.pop();
-//                currentCell = poppedCell;
-//            }
-//        }
-
-        Cell currentCell = new Cell(1,1);
-        maze[1][1] = SPACE_NOT_SHOWN;
-        exploredSpaces.push(currentCell);
-
-        while(!exploredSpaces.empty()) {
-            if(hasValidNeighbour(currentCell)) {
-                findNeighbours(currentCell);
-                Cell randomCell = chooseRandomNeighbour(neighbours);
-//                if(isValidToDelete(randomCell)) {
-                deleteNeighbour(randomCell);
-                exploredSpaces.push(randomCell);
-                currentCell = new Cell(randomCell);
 //                }
-            }
-            Cell poppedCell = exploredSpaces.pop();
-            currentCell = poppedCell;
-        }
-//
-//        Cell currentCell = new Cell(1,1);
-//        maze[1][1] = SPACE_NOT_SHOWN;
-//        exploredSpaces.push(currentCell);
-
-//        while(!exploredSpaces.empty()) {
-//            while(hasValidNeighbour(currentCell)) {
-//                findNeighbours(currentCell);
-//                Cell randomCell = chooseRandomNeighbour(neighbours);
-////                if(isValidToDelete(randomCell)) {
-//                    deleteNeighbour(randomCell);
-//                    exploredSpaces.push(randomCell);
-//                    currentCell = new Cell(randomCell);
-////                }  
 //            }
-//            exploredSpaces.pop();
+//            Cell poppedCell = exploredSpaces.pop();
+//            currentCell = poppedCell;
 //        }
+
+    }
+
+    public boolean visitedCells() {
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 15; j++) {
+                if(maze[i][j] == VISITED) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void setInitialMaze() {
@@ -107,29 +82,29 @@ public class RecursiveBackTracker {
     public boolean hasValidNeighbour(Cell cell) {
         //up
         Cell upCell = cell.getUp(cell);
-        if(maze[upCell.getRow()][upCell.getColumn()] == WALL_NOT_SHOWN){
+        if(maze[upCell.getRow()][upCell.getColumn()] == VISITED){
             return true;
         }
         //down
         Cell downCell = cell.getDown(cell);
-        if (maze[downCell.getRow()][downCell.getColumn()] == WALL_NOT_SHOWN){
+        if (maze[downCell.getRow()][downCell.getColumn()] == VISITED){
             return true;
         }
         //left
         Cell leftCell = cell.getLeft(cell);
-        if(maze[leftCell.getRow()][leftCell.getColumn()] == WALL_NOT_SHOWN){
+        if(maze[leftCell.getRow()][leftCell.getColumn()] == VISITED){
             return true;
         }
         //right
         Cell rightCell = cell.getRight(cell);
-        if(maze[rightCell.getRow()][rightCell.getColumn()] == WALL_NOT_SHOWN){
+        if(maze[rightCell.getRow()][rightCell.getColumn()] == VISITED){
             return true;
         }
         return false;
     }
 
     public boolean isVisited(Cell coord) {
-        if(coord.getRow() == SPACE_NOT_SHOWN && coord.getColumn() == SPACE_NOT_SHOWN) {
+        if(coord.getRow() == VISITED && coord.getColumn() == VISITED) {
             return true;
         } else {
             return false;
@@ -141,34 +116,34 @@ public class RecursiveBackTracker {
 
         //up
         Cell upCell = cell.getUp(cell);
-        if(maze[upCell.getRow()][upCell.getColumn()] == WALL_NOT_SHOWN){
+        if(maze[upCell.getRow()][upCell.getColumn()] == VISITED){
             neighbours.add(upCell);
         }
         //down
         Cell downCell = cell.getDown(cell);
-        if (maze[downCell.getRow()][downCell.getColumn()] == WALL_NOT_SHOWN){
+        if (maze[downCell.getRow()][downCell.getColumn()] == VISITED){
             neighbours.add(downCell);
         }
         //left
         Cell leftCell = cell.getLeft(cell);
-        if(maze[leftCell.getRow()][leftCell.getColumn()] == WALL_NOT_SHOWN){
+        if(maze[leftCell.getRow()][leftCell.getColumn()] == VISITED){
             neighbours.add(leftCell);
         }
         //right
         Cell rightCell = cell.getRight(cell);
-        if(maze[rightCell.getRow()][rightCell.getColumn()] == WALL_NOT_SHOWN){
+        if(maze[rightCell.getRow()][rightCell.getColumn()] == VISITED){
             neighbours.add(rightCell);
         }
 
     }
 
-//    public boolean isValidToDelete(Cell coord) {
-//        if(!isVisited(coord)) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
+    public boolean isValidToDelete(Cell coord) {
+        if(!isVisited(coord)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public Cell chooseRandomNeighbour(ArrayList<Cell> neighbours) {
         Random random = new Random();
