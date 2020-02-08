@@ -55,25 +55,25 @@ public class RecursiveBackTracker {
 //                currentCell = poppedCell;
 //            }
 //        }
-
-        Cell currentCell = new Cell(1,1);
-        maze[1][1] = SPACE_NOT_SHOWN;
-        exploredSpaces.push(currentCell);
-
-        while(!exploredSpaces.empty()) {
-            if(hasValidNeighbour(currentCell)) {
-                findNeighbours(currentCell);
-                Cell randomCell = chooseRandomNeighbour(neighbours);
-//                if(isValidToDelete(randomCell)) {
-                deleteNeighbour(randomCell);
-                exploredSpaces.push(randomCell);
-                currentCell = new Cell(randomCell);
-//                }
-            }
-            Cell poppedCell = exploredSpaces.pop();
-            currentCell = poppedCell;
-        }
 //
+//        Cell currentCell = new Cell(1,1);
+//        maze[1][1] = SPACE_NOT_SHOWN;
+//        exploredSpaces.push(currentCell);
+//
+//        while(!exploredSpaces.empty()) {
+//            if(hasValidNeighbour(currentCell)) {
+//                findNeighbours(currentCell);
+//                Cell randomCell = chooseRandomNeighbour(neighbours);
+////                if(isValidToDelete(randomCell)) {
+//                deleteNeighbour(randomCell);
+//                exploredSpaces.push(randomCell);
+//                currentCell = new Cell(randomCell);
+////                }
+//            }
+//            Cell poppedCell = exploredSpaces.pop();
+//            currentCell = poppedCell;
+//        }
+////
 //        Cell currentCell = new Cell(1,1);
 //        maze[1][1] = SPACE_NOT_SHOWN;
 //        exploredSpaces.push(currentCell);
