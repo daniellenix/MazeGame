@@ -34,8 +34,7 @@ public class Maze {
     }
 
     private boolean isMazeValid() {
-        return (areCornersEmpty());
-        //&& !hasWallSquare(EMPTY_SPACE) && !hasWallSquare(WALL));
+        return (areCornersEmpty() && !hasWallSquare(WALL) && !hasWallSquare(EMPTY_SPACE));
     }
 
     private boolean hasWallSquare(char typeOfWall) {
@@ -43,9 +42,7 @@ public class Maze {
             for (int j = 0; j < COLUMN; j++) {
                 if (maze[i][j] == typeOfWall){
                     Cell currentCell = new Cell(i, j);
-                    if (numberOfAdjacentWalls(currentCell, typeOfWall) == 3){
-                        return true;
-                    } else if (numberOfAdjacentWalls(currentCell, typeOfWall) == 2) {
+                    if (numberOfAdjacentWalls(currentCell, typeOfWall) == 2) {
                         if(cellHasDiagonal(currentCell, typeOfWall)){
                             return true;
                         }
@@ -72,7 +69,7 @@ public class Maze {
                 return true;
             }
         }
-        if (currentCell.hasDownCell(currentCell, typeOfWall, maze) && currentCell.hasRightCell(currentCell, typeOfWall, maze)){
+        if (currentCell.hasDownCell(currentCell, typeOfWall, maze) && currentCell.hasLeftCell(currentCell, typeOfWall, maze)){
             if (maze[currentCell.getRow() + 1][currentCell.getColumn() - 1] == typeOfWall){
                 return true;
             }
