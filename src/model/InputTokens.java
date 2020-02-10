@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import static model.Maze.*;
+
 public class InputTokens {
     private final char MOUSE = '@';
     private final char CHEESE = '$';
@@ -11,13 +13,20 @@ public class InputTokens {
     private Cell cheesePosition;
     private ArrayList<Cell> catPositions;
 
-    public Cell putCheese(int[][] maze) {
+    public void setInitialTokens(char[][] maze){
+        maze[ROW - 2][1] = CAT;
+        maze[ROW - 2][COLUMN - 2] = CAT;
+        maze[1][COLUMN - 2] = CAT;
+        maze[1][1] = MOUSE;
+    }
+
+    public void putCheese(char[][] maze) {
+    }
+
+    public Cell putCat(char[][] maze){
         return null;
     }
 
-    public Cell putCat(int[][] maze){
-        return null;
-    }
 
     public void updateCatPositions(){
 
