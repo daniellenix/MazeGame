@@ -5,11 +5,18 @@ import java.util.Random;
 import java.util.Stack;
 
 public class Maze {
-    private final char EMPTY_SPACE = ' ';
-    private final char WALL = '#';
-    private final char PERIMETER_WALL = '?';
+    public static final char EMPTY_SPACE = ' ';
+    public static final char WALL = '#';
+    public static final char PERIMETER_WALL = '?';
+    public static final char UNEXPLORED_SPACES = '.';
+    public static final char EXPLORED_SPACES = '+';
+
     public static final int ROW = 20;
     public static final int COLUMN = 15;
+
+    public static final char MOUSE = '@';
+    public static final char CHEESE = '$';
+    public static final char CAT = '!';
 
     private static char[][] maze = new char[ROW][COLUMN];
     private Stack<Cell> exploredSpaces = new Stack<>();

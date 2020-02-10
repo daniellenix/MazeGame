@@ -2,9 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
+import static model.Maze.EMPTY_SPACE;
+
 public class Mouse {
     private ArrayList<Cell> emptySpaces = new ArrayList<>();
-    private final char EMPTY_SPACE = ' ';
 
     private boolean doesCellEqualTo(Cell cell, char typeOfWall, char[][] maze){
         return maze[cell.getRow()][cell.getColumn()] == typeOfWall;
