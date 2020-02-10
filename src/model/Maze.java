@@ -1,14 +1,12 @@
 package model;
 
-//test?
-
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
 public class Maze {
-    private final char EMPTY_SPACE = '.';
-    private final char WALL = '+';
+    private final char EMPTY_SPACE = ' ';
+    private final char WALL = '#';
     private final char PERIMETER_WALL = '?';
     private static final int ROW = 20;
     private static final int COLUMN = 15;
@@ -16,8 +14,11 @@ public class Maze {
     private static char[][] maze = new char[ROW][COLUMN];
     private Stack<Cell> exploredSpaces = new Stack<>();
     private ArrayList<Cell> neighbours = new ArrayList<>();
+    private ArrayList<Cell> walls = new ArrayList<>();
 
-    private ArrayList<Cell> islands = new ArrayList<>();
+    public static char[][] getMaze() {
+        return maze;
+    }
 
     public static void main(String[] args) {
         Maze m = new Maze();
@@ -121,14 +122,9 @@ public class Maze {
             } else {
                 startPoint = chooseRandomNeighbour();
                 maze[startPoint.getRow()][startPoint.getColumn()] = EMPTY_SPACE;
-//                islands.add(startPoint);
                 exploredSpaces.push(startPoint);
             }
         }
-
-//        Cell deleteWall = chooseRandomIsland();
-//        maze[deleteWall.getRow()][deleteWall.getColumn()] = EMPTY_SPACE;
-//        System.out.println(deleteWall.toString());
 
         int numberOfIslands = 0;
         while (numberOfIslands != 2){
@@ -138,12 +134,25 @@ public class Maze {
     }
 
     private Cell chooseRandomIsland() {
+        findIslands();
         Random random = new Random();
-        return islands.get(random.nextInt(islands.size()));
+        return walls.get(random.nextInt(walls.size()));
+    }
+
+    private void findIslands() {
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COLUMN; j++) {
+                if(maze[i][j] == WALL){
+                    Cell cell = new Cell(i, j);
+                    walls.add(cell);
+                }
+            }
+        }
     }
 
     public void makeIsland() {
-
+        Cell deleteWall = chooseRandomIsland();
+        maze[deleteWall.getRow()][deleteWall.getColumn()] = EMPTY_SPACE;
     }
 
     private Cell chooseRandomNeighbour() {
@@ -151,7 +160,7 @@ public class Maze {
         return neighbours.get(random.nextInt(neighbours.size()));
     }
 
-    private boolean doesCellEqualTo(Cell cell, int typeOfWall){
+    private boolean doesCellEqualTo(Cell cell, char typeOfWall){
         return maze[cell.getRow()][cell.getColumn()] == typeOfWall;
     }
 
@@ -203,3 +212,43 @@ public class Maze {
         return counter;
     }
 }
+
+
+//    public void makeMaze(){
+//        setInitialMaze();
+//
+//        Cell startPoint = new Cell(1, 1);
+//        exploredSpaces.push(startPoint);
+//        maze[startPoint.getRow()][startPoint.getColumn()] = EMPTY_SPACE;
+//
+//        while (!exploredSpaces.empty()){
+//            findNeighbours(startPoint);
+//            if (neighbours.isEmpty()){
+//                if (!exploredSpaces.empty()){
+//                    startPoint = exploredSpaces.pop();
+//                }
+//            } else {
+//                startPoint = chooseRandomNeighbour();
+//                maze[startPoint.getRow()][startPoint.getColumn()] = EMPTY_SPACE;
+//                islands.add(startPoint);
+//                exploredSpaces.push(startPoint);
+//            }
+//        }
+//
+//        for (int i = 0; i < ROW; i++) {
+//            for (int j = 0; j < COLUMN; j++) {
+//                System.out.print(maze[i][j]);
+//            }
+//            System.out.println();
+//        }
+//
+//        Cell deleteWall = chooseRandomIsland();
+//        maze[deleteWall.getRow()][deleteWall.getColumn()] = EMPTY_SPACE;
+//        System.out.println(deleteWall.toString());
+//
+//        int numberOfIslands = 0;
+//        while (numberOfIslands != 2){
+//            numberOfIslands++;
+//            makeIsland();
+//        }
+//    }

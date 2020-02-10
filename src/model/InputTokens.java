@@ -3,9 +3,9 @@ package model;
 import java.util.ArrayList;
 
 public class InputTokens {
-    private final int MOUSE = 0;
-    private final int CHEESE = 1;
-    private final int CAT = 2;
+    private final char MOUSE = '@';
+    private final char CHEESE = '$';
+    private final char CAT = '!';
 
     private Cell mousePosition;
     private Cell cheesePosition;
