@@ -3,14 +3,13 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static model.Maze.CAT;
+import static model.Maze.EMPTY_SPACE;
+
 public class Cat {
+
     private ArrayList<Cell> emptySpaces = new ArrayList<>();
     private ArrayList<Cell> newCatPositions = new ArrayList<>();
-
-    private final char EMPTY_SPACE = ' ';
-    private final char CAT = '!';
-    private static final int ROW = 20;
-    private static final int COLUMN = 15;
 
     public ArrayList<Cell> getNewCatPositions() {
         return newCatPositions;

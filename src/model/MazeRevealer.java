@@ -1,11 +1,11 @@
 package model;
 
 public class MazeRevealer {
-    private final char PERIMETER_WALL = '?';
+    public final char PERIMETER_WALL = '?';
     private static final int ROW = 20;
     private static final int COLUMN = 15;
-    private final char UNEXPLORED_SPACES = '.';
-    private final char EXPLORED_SPACES = '+';
+    public final char UNEXPLORED_SPACES = '.';
+    public final char EXPLORED_SPACES = '+';
 
     private static char[][] hiddenMaze = new char[ROW][COLUMN];
 
