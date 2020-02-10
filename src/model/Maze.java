@@ -17,6 +17,8 @@ public class Maze {
     private Stack<Cell> exploredSpaces = new Stack<>();
     private ArrayList<Cell> neighbours = new ArrayList<>();
 
+    private ArrayList<Cell> islands = new ArrayList<>();
+
     public static void main(String[] args) {
         Maze m = new Maze();
 
@@ -119,15 +121,25 @@ public class Maze {
             } else {
                 startPoint = chooseRandomNeighbour();
                 maze[startPoint.getRow()][startPoint.getColumn()] = EMPTY_SPACE;
+//                islands.add(startPoint);
                 exploredSpaces.push(startPoint);
             }
         }
+
+//        Cell deleteWall = chooseRandomIsland();
+//        maze[deleteWall.getRow()][deleteWall.getColumn()] = EMPTY_SPACE;
+//        System.out.println(deleteWall.toString());
 
         int numberOfIslands = 0;
         while (numberOfIslands != 2){
             numberOfIslands++;
             makeIsland();
         }
+    }
+
+    private Cell chooseRandomIsland() {
+        Random random = new Random();
+        return islands.get(random.nextInt(islands.size()));
     }
 
     public void makeIsland() {
