@@ -3,26 +3,27 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static model.Maze.CAT;
-import static model.Maze.EMPTY_SPACE;
+import static model.Maze.*;
 
 public class Cat {
 
     private ArrayList<Cell> emptySpaces = new ArrayList<>();
     private ArrayList<Cell> newCatPositions = new ArrayList<>();
+    private ArrayList<Cell> catPositions = new ArrayList<>();
 
-    public ArrayList<Cell> getNewCatPositions() {
-        return newCatPositions;
-    }
-
-    public void updateCatAndMaze(ArrayList<Cell> catPositions, char[][] maze) {
-        for (int i = 0; i < newCatPositions.size(); i++) {
-            maze[newCatPositions.get(i).getRow()][newCatPositions.get(i).getColumn()] = CAT;
-            maze[catPositions.get(i).getRow()][catPositions.get(i).getColumn()] = EMPTY_SPACE;
+    public ArrayList<Cell> getCatPositions(char[][] maze){
+        catPositions.clear();
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COLUMN; j++) {
+                if (maze[i][j] == CAT){
+                    catPositions.add(new Cell(i, j));
+                }
+            }
         }
+        return catPositions;
     }
 
-    public void pickRandomSpace (ArrayList<Cell> catPositions, char[][] maze) {
+    public ArrayList<Cell> getNewCatPositions(char[][] maze){
         newCatPositions.clear();
 
         for (Cell catPosition : catPositions) {
@@ -30,6 +31,12 @@ public class Cat {
             Random random = new Random();
             newCatPositions.add(emptySpaces.get(random.nextInt(emptySpaces.size())));
         }
+
+        return newCatPositions;
+    }
+
+    public void pickRandomSpace (ArrayList<Cell> catPositions, char[][] maze) {
+
     }
 
     private boolean doesCellEqualTo(Cell cell, char typeOfWall, char[][] maze){
