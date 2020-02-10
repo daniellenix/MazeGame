@@ -22,7 +22,30 @@ public class PrintMaze {
     }
 
     public void userDirection(){
+        userInput = new Scanner(System.in);
+        char choice = userInput.next().charAt(0);
 
+        switch(choice) {
+            case 'w':
+            case 'W':
+                // move up
+                break;
+            case 'd':
+            case 'D':
+                // move right
+                break;
+            case 's':
+            case 'S':
+               // move down
+                break;
+            case 'a':
+            case 'A':
+                // move left
+                break;
+            default:
+                System.out.println("Error: Please enter a selection between 1 and 6");
+                break;
+        }
     }
 
     public void displayMenu(){

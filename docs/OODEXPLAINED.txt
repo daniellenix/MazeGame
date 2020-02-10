@@ -15,6 +15,6 @@ input user move).
 We made possible states for each cell in the maze, which displays whether the cell should be 
 revealed or not. For example, a wall shown is represented as the integer 4, and a wall not shown
 is 3. Once the mouse moves to a certain cell, the surrounding not shown pieces become shown. 
-Then, in the UI class, PrintMaze, will get the maze and then displays the ints to the 
+Then, in the ui class, PrintMaze, will get the maze and then displays the ints to the
 corresponding chars. For example, a wall not shown will become '.' and a wall shown will become 
 '#'. This way, we can have one 2D array which represents all the possible states.
