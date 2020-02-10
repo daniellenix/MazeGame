@@ -43,9 +43,7 @@ public class Maze {
             for (int j = 0; j < COLUMN; j++) {
                 if (maze[i][j] == typeOfWall){
                     Cell currentCell = new Cell(i, j);
-                    if (numberOfAdjacentWalls(currentCell, typeOfWall) == 3){
-                        return true;
-                    } else if (numberOfAdjacentWalls(currentCell, typeOfWall) == 2) {
+                    if (numberOfAdjacentWalls(currentCell, typeOfWall) == 2) {
                         if(cellHasDiagonal(currentCell, typeOfWall)){
                             return true;
                         }
