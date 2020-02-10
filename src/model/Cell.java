@@ -54,6 +54,22 @@ public class Cell {
         return new Cell(currentCell.row, currentCell.column + 1);
     }
 
+    public Cell getUpRightDiagonal(Cell currentCell){
+        return new Cell(currentCell.row - 1, currentCell.column + 1);
+    }
+
+    public Cell getUpLeftDiagonal(Cell currentCell){
+        return new Cell(currentCell.row - 1, currentCell.column - 1);
+    }
+
+    public Cell getDownRightDiagonal(Cell currentCell){
+        return new Cell(currentCell.row + 1, currentCell.column + 1);
+    }
+
+    public Cell getDownLeftDiagonal(Cell currentCell){
+        return new Cell(currentCell.row + 1, currentCell.column - 1);
+    }
+
     @Override
     public String toString() {
         return "Cell [" +
