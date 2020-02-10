@@ -6,10 +6,15 @@ import java.util.Random;
 public class Cat {
     private ArrayList<Cell> emptySpaces = new ArrayList<>();
     private ArrayList<Cell> newCatPositions = new ArrayList<>();
+
     private final char EMPTY_SPACE = ' ';
     private final char CAT = '!';
     private static final int ROW = 20;
     private static final int COLUMN = 15;
+
+    public ArrayList<Cell> getNewCatPositions() {
+        return newCatPositions;
+    }
 
     public void updateCatAndMaze(ArrayList<Cell> catPositions, char[][] maze) {
         for (int i = 0; i < newCatPositions.size(); i++) {

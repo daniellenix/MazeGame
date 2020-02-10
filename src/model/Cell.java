@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Cell {
 
     private int row;
@@ -16,6 +18,20 @@ public class Cell {
 
     public int getColumn() {
         return column;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cell cell = (Cell) o;
+        return row == cell.row &&
+                column == cell.column;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(row, column);
     }
 
     public boolean hasUpCell(Cell currentCell, char typeOfWall, char[][] maze){
