@@ -35,7 +35,7 @@ public class Maze {
 
     private boolean isMazeValid() {
         return (areCornersEmpty());
-//        && !hasWallSquare(EMPTY_SPACE) && !hasWallSquare(WALL));
+        //&& !hasWallSquare(EMPTY_SPACE) && !hasWallSquare(WALL));
     }
 
     private boolean hasWallSquare(char typeOfWall) {
@@ -46,9 +46,9 @@ public class Maze {
                     if (numberOfAdjacentWalls(currentCell, typeOfWall) == 3){
                         return true;
                     } else if (numberOfAdjacentWalls(currentCell, typeOfWall) == 2) {
-//                        if(cellHasDiagonal(currentCell, typeOfWall)){
-//                            return true;
-//                        }
+                        if(cellHasDiagonal(currentCell, typeOfWall)){
+                            return true;
+                        }
                     }
                 }
             }
@@ -56,8 +56,29 @@ public class Maze {
         return false;
     }
 
-//    private boolean cellHasDiagonal(Cell currentCell, char typeOfWall) {
-//    }
+    private boolean cellHasDiagonal(Cell currentCell, char typeOfWall) {
+        if (currentCell.hasUpCell(currentCell, typeOfWall, maze) && currentCell.hasRightCell(currentCell, typeOfWall, maze)){
+            if (maze[currentCell.getRow() - 1][currentCell.getColumn() + 1] == typeOfWall){
+                return true;
+            }
+        }
+        if (currentCell.hasUpCell(currentCell, typeOfWall, maze) && currentCell.hasLeftCell(currentCell, typeOfWall, maze)){
+            if (maze[currentCell.getRow() - 1][currentCell.getColumn() - 1] == typeOfWall){
+                return true;
+            }
+        }
+        if (currentCell.hasDownCell(currentCell, typeOfWall, maze) && currentCell.hasRightCell(currentCell, typeOfWall, maze)){
+            if (maze[currentCell.getRow() + 1][currentCell.getColumn() + 1] == typeOfWall){
+                return true;
+            }
+        }
+        if (currentCell.hasDownCell(currentCell, typeOfWall, maze) && currentCell.hasRightCell(currentCell, typeOfWall, maze)){
+            if (maze[currentCell.getRow() + 1][currentCell.getColumn() - 1] == typeOfWall){
+                return true;
+            }
+        }
+        return false;
+    }
 
     private boolean areCornersEmpty() {
         return  maze[ROW - 2][1] == EMPTY_SPACE &&
