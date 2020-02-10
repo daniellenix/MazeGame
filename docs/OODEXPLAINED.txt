@@ -1,0 +1,20 @@
+1. How to generate a new maze
+
+Using the recursive backtracker algorithm, with depth-first search, we will make a new maze.
+First, we fill the maze with all walls. Second, we give the algorithm our initial cell. Third, 
+we find all the valid neighbours and put them in an arrayList, and choose randomly. Fourth, we
+remove the wall between the randomly chosen neighbour, put that onto a stack and make it the new
+initial cell. Once there are no valid neighbours, we pop each cell off the stack, repeating the
+process over again. This is all in our RecursiveBackTracker class, and each time we need to 
+generate a new maze, our GamePlay class will call it. This generated maze will be used for each 
+game session. This maze will also be used by other classes that need to update the maze (i.e. 
+input user move). 
+
+2. How to keep parts of the maze hidden
+
+We made possible states for each cell in the maze, which displays whether the cell should be 
+revealed or not. For example, a wall shown is represented as the integer 4, and a wall not shown
+is 3. Once the mouse moves to a certain cell, the surrounding not shown pieces become shown. 
+Then, in the UI class, PrintMaze, will get the maze and then displays the ints to the 
+corresponding chars. For example, a wall not shown will become '.' and a wall shown will become 
+'#'. This way, we can have one 2D array which represents all the possible states.

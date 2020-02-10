@@ -8,37 +8,19 @@ public class Maze {
     private final char EMPTY_SPACE = ' ';
     private final char WALL = '#';
     private final char PERIMETER_WALL = '?';
-    private static final int ROW = 20;
-    private static final int COLUMN = 15;
+    public static final int ROW = 20;
+    public static final int COLUMN = 15;
 
     private static char[][] maze = new char[ROW][COLUMN];
     private Stack<Cell> exploredSpaces = new Stack<>();
     private ArrayList<Cell> neighbours = new ArrayList<>();
     private ArrayList<Cell> walls = new ArrayList<>();
 
-    public static char[][] getMaze() {
+    public char[][] getMaze() {
         return maze;
     }
 
-    public static void main(String[] args) {
-        Maze m = new Maze();
-
-        boolean isMazeValid = false;
-        while(!isMazeValid){
-            m.makeMaze();
-            if (m.isMazeValid()){
-                isMazeValid = true;
-                for (int i = 0; i < ROW; i++) {
-                    for (int j = 0; j < COLUMN; j++) {
-                        System.out.print(maze[i][j]);
-                    }
-                    System.out.println();
-                }
-            }
-        }
-    }
-
-    private boolean isMazeValid() {
+    public boolean isMazeValid() {
         return (areCornersEmpty() && !hasWallSquare(WALL) && !hasWallSquare(EMPTY_SPACE));
     }
 
