@@ -21,7 +21,7 @@ public class Maze {
     private static char[][] maze = new char[ROW][COLUMN];
     private Stack<Cell> exploredSpaces = new Stack<>();
     private ArrayList<Cell> neighbours = new ArrayList<>();
-    private ArrayList<Cell> walls = new ArrayList<>();
+    private static ArrayList<Cell> walls = new ArrayList<>();
 
     public char[][] getMaze() {
         return maze;
@@ -123,15 +123,15 @@ public class Maze {
     }
 
     private Cell chooseRandomIsland() {
-        findIslands();
+        findSpaces(WALL, maze, walls);
         Random random = new Random();
         return walls.get(random.nextInt(walls.size()));
     }
 
-    private void findIslands() {
+    public static void findSpaces(char typeOfWall, char[][] maze, ArrayList<Cell> walls) {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COLUMN; j++) {
-                if(maze[i][j] == WALL){
+                if(maze[i][j] == typeOfWall){
                     Cell cell = new Cell(i, j);
                     walls.add(cell);
                 }
