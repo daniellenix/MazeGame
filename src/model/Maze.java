@@ -16,6 +16,10 @@ public class Maze {
     private ArrayList<Cell> neighbours = new ArrayList<>();
     private ArrayList<Cell> walls = new ArrayList<>();
 
+    public static char[][] getMaze() {
+        return maze;
+    }
+
     public static void main(String[] args) {
         Maze m = new Maze();
 
@@ -149,7 +153,6 @@ public class Maze {
     public void makeIsland() {
         Cell deleteWall = chooseRandomIsland();
         maze[deleteWall.getRow()][deleteWall.getColumn()] = EMPTY_SPACE;
-        System.out.println(deleteWall.toString());
     }
 
     private Cell chooseRandomNeighbour() {
