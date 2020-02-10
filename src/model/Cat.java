@@ -46,6 +46,7 @@ public class Cat {
     private void findEmptySpaces(Cell catCoord, char[][] maze) {
         emptySpaces.clear();
 
+        //up
         Cell upCell = catCoord.getUp(catCoord);
         if(doesCellEqualTo(upCell, EMPTY_SPACE, maze)){
             emptySpaces.add(upCell);
