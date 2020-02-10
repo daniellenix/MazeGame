@@ -160,7 +160,7 @@ public class Maze {
         return neighbours.get(random.nextInt(neighbours.size()));
     }
 
-    private boolean doesCellEqualTo(Cell cell, int typeOfWall){
+    private boolean doesCellEqualTo(Cell cell, char typeOfWall){
         return maze[cell.getRow()][cell.getColumn()] == typeOfWall;
     }
 
