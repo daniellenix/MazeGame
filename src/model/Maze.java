@@ -17,14 +17,55 @@ public class Maze {
 
     public static void main(String[] args) {
         Maze m = new Maze();
-        m.makeMaze();
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 15; j++) {
-                System.out.print(maze[i][j]);
+
+        boolean isMazeValid = false;
+        while(!isMazeValid){
+            m.makeMaze();
+            if (m.isMazeValid()){
+                isMazeValid = true;
+                for (int i = 0; i < ROW; i++) {
+                    for (int j = 0; j < COLUMN; j++) {
+                        System.out.print(maze[i][j]);
+                    }
+                    System.out.println();
+                }
             }
-            System.out.println();
         }
     }
+
+    private boolean isMazeValid() {
+        return (areCornersEmpty());
+//        && !hasWallSquare(EMPTY_SPACE) && !hasWallSquare(WALL));
+    }
+
+    private boolean hasWallSquare(char typeOfWall) {
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COLUMN; j++) {
+                if (maze[i][j] == typeOfWall){
+                    Cell currentCell = new Cell(i, j);
+                    if (numberOfAdjacentWalls(currentCell, typeOfWall) == 3){
+                        return true;
+                    } else if (numberOfAdjacentWalls(currentCell, typeOfWall) == 2) {
+//                        if(cellHasDiagonal(currentCell, typeOfWall)){
+//                            return true;
+//                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+//    private boolean cellHasDiagonal(Cell currentCell, char typeOfWall) {
+//    }
+
+    private boolean areCornersEmpty() {
+        return  maze[ROW - 2][1] == EMPTY_SPACE &&
+                maze[ROW - 2][COLUMN - 2] == EMPTY_SPACE &&
+                maze[1][COLUMN - 2] == EMPTY_SPACE &&
+                maze[1][1] == EMPTY_SPACE;
+    }
+
 
     public void setInitialMaze() {
         for (int i = 0; i < ROW; i++) {
@@ -32,11 +73,11 @@ public class Maze {
                 maze[i][j] = WALL;
             }
         }
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < COLUMN; i++) {
             maze[0][i] = PERIMETER_WALL;
             maze[ROW - 1][i] = PERIMETER_WALL;
         }
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < ROW; i++) {
             maze[i][0] = PERIMETER_WALL;
             maze[i][COLUMN - 1] = PERIMETER_WALL;
         }
@@ -61,6 +102,16 @@ public class Maze {
                 exploredSpaces.push(startPoint);
             }
         }
+
+        int numberOfIslands = 0;
+        while (numberOfIslands != 2){
+            numberOfIslands++;
+            makeIsland();
+        }
+    }
+
+    public void makeIsland() {
+
     }
 
     private Cell chooseRandomNeighbour() {
@@ -76,47 +127,47 @@ public class Maze {
         neighbours.clear();
 
         Cell upCell = cell.getUp(cell);
-        if(doesCellEqualTo(upCell, WALL) && hasOnlyOneAdjacentSpace(upCell)){
+        if(doesCellEqualTo(upCell, WALL) && numberOfAdjacentWalls(upCell, EMPTY_SPACE) == 1){
             neighbours.add(upCell);
         }
         //down
         Cell downCell = cell.getDown(cell);
-        if (doesCellEqualTo(downCell, WALL) && hasOnlyOneAdjacentSpace(downCell)){
+        if (doesCellEqualTo(downCell, WALL) && numberOfAdjacentWalls(downCell, EMPTY_SPACE) == 1){
             neighbours.add(downCell);
         }
         //left
         Cell leftCell = cell.getLeft(cell);
-        if(doesCellEqualTo(leftCell, WALL) && hasOnlyOneAdjacentSpace(leftCell)){
+        if(doesCellEqualTo(leftCell, WALL) && numberOfAdjacentWalls(leftCell, EMPTY_SPACE) == 1){
             neighbours.add(leftCell);
         }
         //right
         Cell rightCell = cell.getRight(cell);
-        if(doesCellEqualTo(rightCell, WALL) && hasOnlyOneAdjacentSpace(rightCell)){
+        if(doesCellEqualTo(rightCell, WALL) && numberOfAdjacentWalls(rightCell, EMPTY_SPACE) == 1){
             neighbours.add(rightCell);
         }
     }
 
-    private boolean hasOnlyOneAdjacentSpace(Cell cell) {
+    private int numberOfAdjacentWalls(Cell cell, char typeOfWall) {
         int counter = 0;
         Cell upCell = cell.getUp(cell);
-        if(maze[upCell.getRow()][upCell.getColumn()] == EMPTY_SPACE){
+        if(doesCellEqualTo(upCell, typeOfWall)){
             counter++;
         }
         //down
         Cell downCell = cell.getDown(cell);
-        if (maze[downCell.getRow()][downCell.getColumn()] == EMPTY_SPACE){
+        if (doesCellEqualTo(downCell, typeOfWall)){
             counter++;
         }
         //left
         Cell leftCell = cell.getLeft(cell);
-        if(maze[leftCell.getRow()][leftCell.getColumn()] == EMPTY_SPACE){
+        if(doesCellEqualTo(leftCell, typeOfWall)){
             counter++;
         }
         //right
         Cell rightCell = cell.getRight(cell);
-        if(maze[rightCell.getRow()][rightCell.getColumn()] == EMPTY_SPACE){
+        if(doesCellEqualTo(rightCell, typeOfWall)){
             counter++;
         }
-        return counter == 1;
+        return counter;
     }
 }

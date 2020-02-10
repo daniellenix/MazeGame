@@ -55,21 +55,25 @@ public class Cell {
         this.isVisited = isVisited;
     }
 
-//    public Cell goUp(Cell oldCell) {
-//        return new Cell(oldCell.row - 1, oldCell.column);
-//    }
-//
-//    public Cell goDown(Cell oldCell) {
-//        return new Cell(oldCell.row + 1, oldCell.column);
-//    }
-//
-//    public Cell goLeft(Cell oldCell) {
-//        return new Cell(oldCell.column - 1, oldCell.column);
-//    }
-//
-//    public Cell goRight(Cell oldCell) {
-//        return new Cell(oldCell.column + 1, oldCell.column);
-//    }
+    public boolean hasUpCell(Cell currentCell, char typeOfWall, char[][] maze){
+        Cell upCell = getUp(currentCell);
+        return maze[upCell.row][upCell.column] == typeOfWall;
+    }
+
+    public boolean hasDownCell(Cell currentCell, char typeOfWall, char[][] maze){
+        Cell downCell = getDown(currentCell);
+        return maze[downCell.row][downCell.column] == typeOfWall;
+    }
+
+    public boolean hasLeftCell(Cell currentCell, char typeOfWall, char[][] maze){
+        Cell leftCell = getLeft(currentCell);
+        return maze[leftCell.row][leftCell.column] == typeOfWall;
+    }
+
+    public boolean hasRightCell(Cell currentCell, char typeOfWall, char[][] maze){
+        Cell rightCell = getRight(currentCell);
+        return maze[rightCell.row][rightCell.column] == typeOfWall;
+    }
 
     public Cell getUp(Cell currentCell) {
         return new Cell(currentCell.row - 1, currentCell.column, false);
@@ -85,10 +89,5 @@ public class Cell {
 
     public Cell getRight(Cell currentCell) {
         return new Cell(currentCell.row, currentCell.column + 1, false);
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(state);
     }
 }
