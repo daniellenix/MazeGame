@@ -127,10 +127,10 @@ public class PrintMaze {
                     }
                 }
 
-            if (gamePlay.didCatGetMouse(inputTokens.getCatPositions(), inputTokens.getMousePosition())) {
+            if (gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze))) {
                 System.out.println("I'm sorry, you have been eaten!");
                 currentCheese = totalCheese;
-            } else if (gamePlay.didMouseGetCheese(inputTokens.getCheesePosition(), inputTokens.getMousePosition())) {
+            } else if (gamePlay.didMouseGetCheese(inputTokens.getCheesePosition(), mouse.findMousePosition(maze))) {
                 currentCheese++;
                 System.out.println("Congratulations! You won!");
                 displayMaze(hiddenMaze, maze);

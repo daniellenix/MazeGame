@@ -17,7 +17,12 @@ public class InputTokens {
         maze[1][COLUMN - 2] = CAT;
         maze[1][1] = MOUSE;
         Cell cheeseCell = putCheese(maze);
+        cheesePosition = cheeseCell;
         maze[cheeseCell.getRow()][cheeseCell.getColumn()] = CHEESE;
+    }
+
+    public Cell getCheesePosition() {
+        return cheesePosition;
     }
 
     public Cell putCheese(char[][] maze) {
@@ -45,5 +50,8 @@ public class InputTokens {
             maze[catPositions.get(i).getRow()][catPositions.get(i).getColumn()] = EMPTY_SPACE;
         }
     }
+
+
+
 
 }
