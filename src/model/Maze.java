@@ -155,7 +155,7 @@ public class Maze {
 
     private void findNeighbours(Cell cell) {
         neighbours.clear();
-
+        //up
         Cell upCell = cell.getUp(cell);
         if(doesCellEqualTo(upCell, WALL) && numberOfAdjacentWalls(upCell, EMPTY_SPACE) == 1){
             neighbours.add(upCell);
@@ -179,6 +179,7 @@ public class Maze {
 
     private int numberOfAdjacentWalls(Cell cell, char typeOfWall) {
         int counter = 0;
+        //up
         Cell upCell = cell.getUp(cell);
         if(doesCellEqualTo(upCell, typeOfWall)){
             counter++;
@@ -201,43 +202,3 @@ public class Maze {
         return counter;
     }
 }
-
-
-//    public void makeMaze(){
-//        setInitialMaze();
-//
-//        Cell startPoint = new Cell(1, 1);
-//        exploredSpaces.push(startPoint);
-//        maze[startPoint.getRow()][startPoint.getColumn()] = EMPTY_SPACE;
-//
-//        while (!exploredSpaces.empty()){
-//            findNeighbours(startPoint);
-//            if (neighbours.isEmpty()){
-//                if (!exploredSpaces.empty()){
-//                    startPoint = exploredSpaces.pop();
-//                }
-//            } else {
-//                startPoint = chooseRandomNeighbour();
-//                maze[startPoint.getRow()][startPoint.getColumn()] = EMPTY_SPACE;
-//                islands.add(startPoint);
-//                exploredSpaces.push(startPoint);
-//            }
-//        }
-//
-//        for (int i = 0; i < ROW; i++) {
-//            for (int j = 0; j < COLUMN; j++) {
-//                System.out.print(maze[i][j]);
-//            }
-//            System.out.println();
-//        }
-//
-//        Cell deleteWall = chooseRandomIsland();
-//        maze[deleteWall.getRow()][deleteWall.getColumn()] = EMPTY_SPACE;
-//        System.out.println(deleteWall.toString());
-//
-//        int numberOfIslands = 0;
-//        while (numberOfIslands != 2){
-//            numberOfIslands++;
-//            makeIsland();
-//        }
-//    }
