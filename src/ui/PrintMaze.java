@@ -2,7 +2,7 @@ package ui;
 
 import java.util.Scanner;
 
-import static model.Maze.*;
+import static model.RecursiveBackTracker.*;
 
 public class PrintMaze {
     private Scanner userInput;

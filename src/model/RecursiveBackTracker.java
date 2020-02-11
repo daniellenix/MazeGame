@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
-public class Maze {
+public class RecursiveBackTracker {
     public static final char EMPTY_SPACE = ' ';
     public static final char WALL = '#';
     public static final char PERIMETER_WALL = '?';

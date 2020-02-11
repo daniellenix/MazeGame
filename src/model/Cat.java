@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Random;
-import static model.Maze.*;
+import static model.RecursiveBackTracker.*;
 
 //is this where we keep track of the position the cat is on?
 
