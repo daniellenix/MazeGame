@@ -43,7 +43,7 @@ public class Mouse {
     public Cell findMousePosition(char[][] maze){
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COLUMN; j++) {
-                if (maze[i][j] == CAT){
+                if (maze[i][j] == MOUSE){
                     return new Cell(i, j);
                 }
             }

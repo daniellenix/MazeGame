@@ -23,7 +23,7 @@ public class Cat {
         return catPositions;
     }
 
-    public ArrayList<Cell> getNewCatPositions(char[][] maze){
+    public ArrayList<Cell> getNewCatPositions(char[][] maze, ArrayList<Cell> catPositions){
         newCatPositions.clear();
 
         for (Cell catPosition : catPositions) {
