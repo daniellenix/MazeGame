@@ -47,19 +47,17 @@ public class PrintMaze {
     }
 
     public void userDirection(){
-
-        gamePlay.setInitialMaze();
-        char[][] maze = GamePlay.getMaze();
-
-        title();
-        displayMenu();
-        System.out.println();
-
-        testDisplay(maze);
-
-        Cell cheesePosition = inputTokens.getCheesePosition(maze);
-
         while(currentCheese != totalCheese) {
+            gamePlay.setInitialMaze();
+            char[][] maze = GamePlay.getMaze();
+
+            title();
+            displayMenu();
+            System.out.println();
+
+            testDisplay(maze);
+
+            Cell cheesePosition = inputTokens.getCheesePosition(maze);
             while(!gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze)) &&
                     !gamePlay.didMouseGetCheese(cheesePosition, mouse.findMousePosition(maze))) {
 
@@ -143,10 +141,10 @@ public class PrintMaze {
                 testDisplay(maze);
             }
         }
-        if(currentCheese == 5) {
-            System.out.println("Congratulations! You won!");
-            testDisplay(maze);
-        }
+//        if(currentCheese == 5) {
+//            System.out.println("Congratulations! You won!");
+//            testDisplay(maze);
+//        }
     }
 
     private void cheeseCounterDisplay() {
