@@ -57,9 +57,11 @@ public class PrintMaze {
 
         testDisplay(maze);
 
+        Cell cheesePosition = inputTokens.getCheesePosition(maze);
+
         while(currentCheese != totalCheese) {
             while(!gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze)) &&
-                    !gamePlay.didMouseGetCheese(inputTokens.getCheesePosition(maze), mouse.findMousePosition(maze))) {
+                    !gamePlay.didMouseGetCheese(cheesePosition, mouse.findMousePosition(maze))) {
 
                 System.out.println("here");
                 cheeseCounterDisplay();
@@ -135,7 +137,7 @@ public class PrintMaze {
             if (gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze))) {
                 System.out.println("I'm sorry, you have been eaten!");
                 currentCheese = totalCheese;
-            } else if (gamePlay.didMouseGetCheese(inputTokens.getCheesePosition(maze), mouse.findMousePosition(maze))) {
+            } else if (gamePlay.didMouseGetCheese(cheesePosition, mouse.findMousePosition(maze))) {
                 currentCheese++;
                 System.out.println("Congratulations! You won!");
                 testDisplay(maze);
