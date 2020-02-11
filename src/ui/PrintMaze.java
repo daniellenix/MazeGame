@@ -61,6 +61,8 @@ public class PrintMaze {
 
                 cheeseCounterDisplay();
 
+//                System.out.println(cell.getRight(cell).toString());
+
                 userInput = new Scanner(System.in);
                 char choice = userInput.next().charAt(0);
 

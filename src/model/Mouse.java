@@ -14,7 +14,7 @@ public class Mouse {
 
     private void findEmptySpaces(Cell mouseCoord, char[][] maze) {
         emptySpaces.clear();
-
+        //up
         Cell upCell = mouseCoord.getUp(mouseCoord);
         if(doesCellEqualTo(upCell, EMPTY_SPACE, maze) || doesCellEqualTo(upCell, CAT, maze) ||
                 doesCellEqualTo(upCell, MOUSE, maze)){
@@ -54,6 +54,7 @@ public class Mouse {
 
     public boolean isValidMove (Cell userInput, char[][] maze) {
         Cell currentMouseCoord = findMousePosition(maze);
+        findEmptySpaces(currentMouseCoord, maze);
         for (int i = 0; i < emptySpaces.size(); i++) {
             if (userInput.equals(currentMouseCoord)){
                 return true;
