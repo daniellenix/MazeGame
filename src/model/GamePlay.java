@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import static model.RecursiveBackTracker.COLUMN;
 import static model.RecursiveBackTracker.ROW;
-//need to make a maze in here so we keep changing this private field, and not generate new ones
-    //pass this maze to functions
 
 public class GamePlay {
     public static char[][] getMaze() {
@@ -14,7 +12,7 @@ public class GamePlay {
 
     private static char[][] maze = new char[ROW][COLUMN];
 
-    public void setIntialMaze(){
+    public void setInitialMaze(){
         initializeMaze();
         InputTokens inputTokens = new InputTokens();
         inputTokens.setInitialTokens(maze);
@@ -46,4 +44,7 @@ public class GamePlay {
         return false;
     }
 
+
 }
+
+

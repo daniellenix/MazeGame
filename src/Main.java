@@ -1,5 +1,4 @@
 import model.GamePlay;
-import model.RecursiveBackTracker;
 
 import static model.RecursiveBackTracker.COLUMN;
 import static model.RecursiveBackTracker.ROW;
@@ -12,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
 
         GamePlay gamePlay = new GamePlay();
-        gamePlay.setIntialMaze();
+        gamePlay.setInitialMaze();
         char[][] maze = gamePlay.getMaze();
 
         for (int i = 0; i < ROW; i++) {
