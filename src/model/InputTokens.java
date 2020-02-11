@@ -7,7 +7,7 @@ import static model.RecursiveBackTracker.*;
 public class InputTokens {
 
     private Cell mousePosition = new Cell(1,1);
-    private Cell cheesePosition = new Cell(2,2);
+    private Cell cheesePosition;
     private ArrayList<Cell> emptyPositions = new ArrayList<>();
 
     public void setInitialTokens(char[][] maze){
