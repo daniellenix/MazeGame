@@ -8,9 +8,6 @@ import static model.RecursiveBackTracker.COLUMN;
 import static model.RecursiveBackTracker.ROW;
 
 public class Main {
-//while loop here ?
-    // if "c" - then loop once becuase 1 cheese
-    // if "m" - dont use hidden maze
 
     public static void main(String[] args) {
 

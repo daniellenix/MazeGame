@@ -13,7 +13,7 @@ public class Mouse {
 
     private void findEmptySpaces(Cell mouseCoord, char[][] maze) {
         emptySpaces.clear();
-
+        //up
         Cell upCell = mouseCoord.getUp(mouseCoord);
         if(doesCellEqualTo(upCell, EMPTY_SPACE, maze) || doesCellEqualTo(upCell, CAT, maze) ||
                 doesCellEqualTo(upCell, MOUSE, maze)){

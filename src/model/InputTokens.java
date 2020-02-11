@@ -29,11 +29,9 @@ public class InputTokens {
     public void updateMouseAndMaze(Cell userInput, char[][] maze) {
         Mouse mouse = new Mouse();
         Cell oldMousePosition = mouse.findMousePosition(maze);
-//        if (mouse.isValidMove(userInput, maze)){
-            maze[userInput.getRow()][userInput.getColumn()] = MOUSE;
-            //wrong - how are we going to remember the piece the cat moves to
-            maze[oldMousePosition.getRow()][oldMousePosition.getColumn()] = EMPTY_SPACE;
-//        }
+        maze[userInput.getRow()][userInput.getColumn()] = MOUSE;
+        //wrong - how are we going to remember the piece the cat moves to
+        maze[oldMousePosition.getRow()][oldMousePosition.getColumn()] = EMPTY_SPACE;
     }
 
     public void updateCatsAndMaze(char[][] maze) {
