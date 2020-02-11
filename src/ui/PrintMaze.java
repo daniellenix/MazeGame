@@ -18,6 +18,7 @@ public class PrintMaze {
     Mouse mouse = new Mouse();
     InputTokens inputTokens = new InputTokens();
     Cell cell = new Cell(1, 1);
+    Cat cat = new Cat();
 
     public void displayMaze(char[][] hiddenMaze, char[][] maze){
         System.out.println("Maze:");
@@ -57,8 +58,8 @@ public class PrintMaze {
         testDisplay(maze);
 
         while(currentCheese != totalCheese) {
-            while(!gamePlay.didCatGetMouse(inputTokens.getCatPositions(), inputTokens.getMousePosition()) &&
-                    !gamePlay.didMouseGetCheese(inputTokens.getCheesePosition(), inputTokens.getMousePosition())) {
+            while(!gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze)) &&
+                    !gamePlay.didMouseGetCheese(inputTokens.getCheesePosition(), mouse.findMousePosition(maze))) {
 
                 cheeseCounterDisplay();
                 userInput = new Scanner(System.in);
@@ -126,10 +127,10 @@ public class PrintMaze {
                     }
                 }
 
-            if (gamePlay.didCatGetMouse(inputTokens.getCatPositions(), inputTokens.getMousePosition())) {
+            if (gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze))) {
                 System.out.println("I'm sorry, you have been eaten!");
                 currentCheese = totalCheese;
-            } else if (gamePlay.didMouseGetCheese(inputTokens.getCheesePosition(), inputTokens.getMousePosition())) {
+            } else if (gamePlay.didMouseGetCheese(inputTokens.getCheesePosition(), mouse.findMousePosition(maze))) {
                 currentCheese++;
                 System.out.println("Congratulations! You won!");
                 displayMaze(hiddenMaze, maze);

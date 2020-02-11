@@ -37,6 +37,7 @@ public class InputTokens {
         maze[userInput.getRow()][userInput.getColumn()] = MOUSE;
         //wrong - how are we going to remember the piece the cat moves to
         maze[oldMousePosition.getRow()][oldMousePosition.getColumn()] = EMPTY_SPACE;
+        mousePosition = userInput;
     }
 
     public void updateCatsAndMaze(char[][] maze) {
@@ -49,4 +50,8 @@ public class InputTokens {
             maze[catPositions.get(i).getRow()][catPositions.get(i).getColumn()] = EMPTY_SPACE;
         }
     }
+
+
+
+
 }
