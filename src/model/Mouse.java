@@ -2,8 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
-import static model.Maze.*;
-import static model.Maze.CAT;
+import static model.RecursiveBackTracker.*;
+import static model.RecursiveBackTracker.CAT;
 
 public class Mouse {
     private ArrayList<Cell> emptySpaces = new ArrayList<>();

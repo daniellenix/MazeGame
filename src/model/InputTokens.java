@@ -2,17 +2,17 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Random;
-import static model.Maze.*;
+import static model.RecursiveBackTracker.*;
 
 public class InputTokens {
-//problem
 
     private Cell mousePosition;
     private Cell cheesePosition;
-    private ArrayList<Cell> catPositions;
-    private ArrayList<Cell> emptyPositions;
+    private ArrayList<Cell> catPositions = new ArrayList<>();
+    private ArrayList<Cell> emptyPositions = new ArrayList<>();
 
     public void setInitialTokens(char[][] maze){
+        System.out.println("here 2");
         maze[ROW - 2][1] = CAT;
         maze[ROW - 2][COLUMN - 2] = CAT;
         maze[1][COLUMN - 2] = CAT;
@@ -22,8 +22,14 @@ public class InputTokens {
     }
 
     public Cell putCheese(char[][] maze) {
+        System.out.println("here");
         findSpaces(EMPTY_SPACE, maze, emptyPositions);
+        System.out.println("here 5");
+        System.out.println(emptyPositions.size());
         Random random = new Random();
+        System.out.println(emptyPositions.get(random.nextInt(emptyPositions.size())));
+        System.out.println("um");
+
         return emptyPositions.get(random.nextInt(emptyPositions.size()));
     }
 
@@ -46,17 +52,5 @@ public class InputTokens {
             maze[newCatPositions.get(i).getRow()][newCatPositions.get(i).getColumn()] = CAT;
             maze[catPositions.get(i).getRow()][catPositions.get(i).getColumn()] = EMPTY_SPACE;
         }
-    }
-
-    public void getCatPositions(){
-
-    }
-
-    public void getMousePosition(){
-
-    }
-
-    public void getCheesePositions(){
-
     }
 }
