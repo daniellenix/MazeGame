@@ -59,6 +59,8 @@ public class PrintMaze {
         while(currentCheese != totalCheese) {
             while(!gamePlay.didCatGetMouse(inputTokens.getCatPositions(), inputTokens.getMousePosition()) && !gamePlay.didMouseGetCheese(inputTokens.getCheesePosition(), inputTokens.getMousePosition())) {
 
+                cheeseCounterDisplay();
+
                 userInput = new Scanner(System.in);
                 char choice = userInput.next().charAt(0);
 
@@ -69,7 +71,6 @@ public class PrintMaze {
                             if(mouse.isValidMove(cell.getUp(cell), maze)) {
                                 inputTokens.updateMouseAndMaze(cell.getUp(cell), maze);
                                 inputTokens.updateCatsAndMaze(maze);
-                                cheeseCounterDisplay();
                             } else {
                                 System.out.println("Invalid move: you cannot move through walls!");
                             }
@@ -80,7 +81,6 @@ public class PrintMaze {
                             if(mouse.isValidMove(cell.getRight(cell), maze)) {
                                 inputTokens.updateMouseAndMaze(cell.getRight(cell), maze);
                                 inputTokens.updateCatsAndMaze(maze);
-                                cheeseCounterDisplay();
                             } else {
                                 System.out.println("Invalid move: you cannot move through walls!");
                             }
@@ -91,7 +91,6 @@ public class PrintMaze {
                             if(mouse.isValidMove(cell.getDown(cell), maze)) {
                                 inputTokens.updateMouseAndMaze(cell.getDown(cell), maze);
                                 inputTokens.updateCatsAndMaze(maze);
-                                cheeseCounterDisplay();
                             } else {
                                 System.out.println("Invalid move: you cannot move through walls!");
                             }
@@ -102,7 +101,6 @@ public class PrintMaze {
                             if(mouse.isValidMove(cell.getLeft(cell), maze)) {
                                 inputTokens.updateMouseAndMaze(cell.getLeft(cell), maze);
                                 inputTokens.updateCatsAndMaze(maze);
-                                cheeseCounterDisplay();
                             } else {
                                 System.out.println("Invalid move: you cannot move through walls!");
                             }
@@ -118,7 +116,6 @@ public class PrintMaze {
                         case 'c':
                         case 'C':
                             totalCheese = 1;
-                            System.out.print("Enter your move [WASD?]: ");
                             break;
                         default:
                             System.out.println("Invalid move. Please enter just A (left), S (down), D (right), or W (up).");
