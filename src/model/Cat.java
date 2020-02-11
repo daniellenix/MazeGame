@@ -31,12 +31,7 @@ public class Cat {
             Random random = new Random();
             newCatPositions.add(emptySpaces.get(random.nextInt(emptySpaces.size())));
         }
-
         return newCatPositions;
-    }
-
-    public void pickRandomSpace (ArrayList<Cell> catPositions, char[][] maze) {
-
     }
 
     private boolean doesCellEqualTo(Cell cell, char typeOfWall, char[][] maze){
@@ -48,22 +43,26 @@ public class Cat {
 
         //up
         Cell upCell = catCoord.getUp(catCoord);
-        if(doesCellEqualTo(upCell, EMPTY_SPACE, maze)){
+        if(doesCellEqualTo(upCell, EMPTY_SPACE, maze) || doesCellEqualTo(upCell, MOUSE, maze) ||
+                doesCellEqualTo(upCell, CHEESE, maze)){
             emptySpaces.add(upCell);
         }
         //down
         Cell downCell = catCoord.getDown(catCoord);
-        if (doesCellEqualTo(downCell, EMPTY_SPACE, maze)){
+        if (doesCellEqualTo(downCell, EMPTY_SPACE, maze) || doesCellEqualTo(upCell, MOUSE, maze) ||
+                doesCellEqualTo(upCell, CHEESE, maze)){
             emptySpaces.add(downCell);
         }
         //left
         Cell leftCell = catCoord.getLeft(catCoord);
-        if(doesCellEqualTo(leftCell, EMPTY_SPACE, maze)){
+        if(doesCellEqualTo(leftCell, EMPTY_SPACE, maze) || doesCellEqualTo(upCell, MOUSE, maze) ||
+                doesCellEqualTo(upCell, CHEESE, maze)){
             emptySpaces.add(leftCell);
         }
         //right
         Cell rightCell = catCoord.getRight(catCoord);
-        if(doesCellEqualTo(rightCell, EMPTY_SPACE, maze)){
+        if(doesCellEqualTo(rightCell, EMPTY_SPACE, maze) || doesCellEqualTo(upCell, MOUSE, maze) ||
+                doesCellEqualTo(upCell, CHEESE, maze)){
             emptySpaces.add(rightCell);
         }
     }
