@@ -72,6 +72,7 @@ public class PrintMaze {
                             if(mouse.isValidMove(cell.getUp(cell), maze)) {
                                 inputTokens.updateMouseAndMaze(cell.getUp(cell), maze);
                                 inputTokens.updateCatsAndMaze(maze);
+                                cell = cell.getUp(cell);
                                 testDisplay(maze);
                             } else {
                                 System.out.println("Invalid move: you cannot move through walls!");
@@ -83,6 +84,7 @@ public class PrintMaze {
                             if(mouse.isValidMove(cell.getRight(cell), maze)) {
                                 inputTokens.updateMouseAndMaze(cell.getRight(cell), maze);
                                 inputTokens.updateCatsAndMaze(maze);
+                                cell = cell.getRight(cell);
                                 testDisplay(maze);
                             } else {
                                 System.out.println("Invalid move: you cannot move through walls!");
@@ -94,6 +96,7 @@ public class PrintMaze {
                             if(mouse.isValidMove(cell.getDown(cell), maze)) {
                                 inputTokens.updateMouseAndMaze(cell.getDown(cell), maze);
                                 inputTokens.updateCatsAndMaze(maze);
+                                cell = cell.getDown(cell);
                                 testDisplay(maze);
                             } else {
                                 System.out.println("Invalid move: you cannot move through walls!");
@@ -105,6 +108,7 @@ public class PrintMaze {
                             if(mouse.isValidMove(cell.getLeft(cell), maze)) {
                                 inputTokens.updateMouseAndMaze(cell.getLeft(cell), maze);
                                 inputTokens.updateCatsAndMaze(maze);
+                                cell = cell.getLeft(cell);
                                 testDisplay(maze);
                             } else {
                                 System.out.println("Invalid move: you cannot move through walls!");

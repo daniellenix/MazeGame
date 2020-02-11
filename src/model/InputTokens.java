@@ -8,7 +8,6 @@ public class InputTokens {
 
     private Cell mousePosition = new Cell(1,1);
     private Cell cheesePosition = new Cell(2,2);
-    private ArrayList<Cell> catPositions = new ArrayList<>();
     private ArrayList<Cell> emptyPositions = new ArrayList<>();
 
     public void setInitialTokens(char[][] maze){
@@ -50,8 +49,4 @@ public class InputTokens {
             maze[catPositions.get(i).getRow()][catPositions.get(i).getColumn()] = EMPTY_SPACE;
         }
     }
-
-
-
-
 }
