@@ -119,7 +119,7 @@ public class PrintMaze {
                             break;
                         case 'm':
                         case 'M':
-                            displayMaze(hiddenMaze, maze);
+                            testDisplay(maze);
                             cheeseCounterDisplay();
                             break;
                         case 'c':
@@ -137,12 +137,12 @@ public class PrintMaze {
             } else if (gamePlay.didMouseGetCheese(inputTokens.getCheesePosition(), mouse.findMousePosition(maze))) {
                 currentCheese++;
                 System.out.println("Congratulations! You won!");
-                displayMaze(hiddenMaze, maze);
+                testDisplay(maze);
             }
         }
         if(currentCheese == 5) {
             System.out.println("Congratulations! You won!");
-            displayMaze(hiddenMaze, maze);
+            testDisplay(maze);
         }
     }
 
