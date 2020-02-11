@@ -8,7 +8,6 @@ import static model.RecursiveBackTracker.*;
 
 public class PrintMaze {
 
-    private Scanner userInput;
     private int currentCheese = 0;
     private int totalCheese = 5;
 
@@ -61,8 +60,9 @@ public class PrintMaze {
             while(!gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze)) &&
                     !gamePlay.didMouseGetCheese(inputTokens.getCheesePosition(), mouse.findMousePosition(maze))) {
 
+                System.out.println("here");
                 cheeseCounterDisplay();
-                userInput = new Scanner(System.in);
+                Scanner userInput = new Scanner(System.in);
                 char choice = userInput.next().charAt(0);
 
                     switch(choice) {
