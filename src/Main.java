@@ -4,9 +4,6 @@ import model.InputTokens;
 import model.Mouse;
 import ui.PrintMaze;
 
-import java.io.PrintWriter;
-import java.sql.SQLOutput;
-
 import static model.RecursiveBackTracker.COLUMN;
 import static model.RecursiveBackTracker.ROW;
 
