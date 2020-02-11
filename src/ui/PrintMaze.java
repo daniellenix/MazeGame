@@ -48,7 +48,7 @@ public class PrintMaze {
     public void userDirection(){
 
         gamePlay.setInitialMaze();
-        char[][] maze = gamePlay.getMaze();
+        char[][] maze = GamePlay.getMaze();
 
         title();
         displayMenu();
@@ -57,10 +57,10 @@ public class PrintMaze {
         testDisplay(maze);
 
         while(currentCheese != totalCheese) {
-            while(!gamePlay.didCatGetMouse(inputTokens.getCatPositions(), inputTokens.getMousePosition()) && !gamePlay.didMouseGetCheese(inputTokens.getCheesePosition(), inputTokens.getMousePosition())) {
+            while(!gamePlay.didCatGetMouse(inputTokens.getCatPositions(), inputTokens.getMousePosition()) &&
+                    !gamePlay.didMouseGetCheese(inputTokens.getCheesePosition(), inputTokens.getMousePosition())) {
 
                 cheeseCounterDisplay();
-
                 userInput = new Scanner(System.in);
                 char choice = userInput.next().charAt(0);
 

@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 
 import static model.RecursiveBackTracker.*;
-import static model.RecursiveBackTracker.CAT;
 
 public class Mouse {
     private ArrayList<Cell> emptySpaces = new ArrayList<>();
@@ -54,11 +53,32 @@ public class Mouse {
 
     public boolean isValidMove (Cell userInput, char[][] maze) {
         Cell currentMouseCoord = findMousePosition(maze);
-        for (int i = 0; i < emptySpaces.size(); i++) {
-            if (userInput.equals(currentMouseCoord)){
+        findEmptySpaces(currentMouseCoord, maze);
+        for (Cell emptySpace : emptySpaces) {
+            if (userInput.equals(emptySpace)) {
                 return true;
             }
         }
         return false;
     }
+
+//    public static void main(String[] args) {
+//        GamePlay gamePlay = new GamePlay();
+//        gamePlay.setInitialMaze();
+//        char[][] maze = gamePlay.getMaze();
+//
+//        for (int i = 0; i < ROW; i++) {
+//            for (int j = 0; j < COLUMN; j++) {
+//                System.out.print(maze[i][j]);
+//            }
+//            System.out.println();
+//        }
+//
+//        Mouse mouse = new Mouse();
+//
+//        System.out.println(mouse.findMousePosition(maze));
+//        Cell current = mouse.findMousePosition(maze);
+//        System.out.println(mouse.isValidMove(current.getDown(current), maze));
+//        System.out.println(mouse.emptySpaces);
+//    }
 }
