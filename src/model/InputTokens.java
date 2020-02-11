@@ -7,7 +7,6 @@ import static model.RecursiveBackTracker.*;
 public class InputTokens {
 
     private Cell mousePosition = new Cell(1,1);
-    private Cell cheesePosition;
     private ArrayList<Cell> emptyPositions = new ArrayList<>();
 
     public void setInitialTokens(char[][] maze){
@@ -16,12 +15,18 @@ public class InputTokens {
         maze[1][COLUMN - 2] = CAT;
         maze[1][1] = MOUSE;
         Cell cheeseCell = putCheese(maze);
-        cheesePosition = cheeseCell;
         maze[cheeseCell.getRow()][cheeseCell.getColumn()] = CHEESE;
     }
 
-    public Cell getCheesePosition() {
-        return cheesePosition;
+    public Cell getCheesePosition(char[][] maze) {
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COLUMN; j++) {
+                if (maze[i][j] == CHEESE){
+                    return new Cell(i, j);
+                }
+            }
+        }
+        return null;
     }
 
     public Cell putCheese(char[][] maze) {
