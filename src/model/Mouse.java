@@ -53,17 +53,17 @@ public class Mouse {
 
     public boolean isValidMove (Cell userInput, char[][] maze) {
         Cell currentMouseCoord = findMousePosition(maze);
-        System.out.println("current mouse position = " + currentMouseCoord);
-        System.out.println("userInput position = " + userInput);
+//        System.out.println("current mouse position = " + currentMouseCoord);
+//        System.out.println("userInput position = " + userInput);
         findEmptySpaces(currentMouseCoord, maze);
-        System.out.println("list of empty spaces = " + emptySpaces);
+//        System.out.println("list of empty spaces = " + emptySpaces);
         for (Cell emptySpace : emptySpaces) {
             if (userInput.equals(emptySpace)) {
-                System.out.println("in true");
+//                System.out.println("in true");
                 return true;
             }
         }
-        System.out.println("in false");
+//        System.out.println("in false");
         return false;
     }
 }
