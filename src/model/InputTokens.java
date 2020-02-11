@@ -2,10 +2,10 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 import static model.Maze.*;
 
 public class InputTokens {
+//problem
 
     private Cell mousePosition;
     private Cell cheesePosition;

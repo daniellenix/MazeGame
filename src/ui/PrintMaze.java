@@ -21,6 +21,7 @@ public class PrintMaze {
         }
     }
 
+    //you can use .equalsToLower()
     public void userDirection(){
         userInput = new Scanner(System.in);
         char choice = userInput.next().charAt(0);

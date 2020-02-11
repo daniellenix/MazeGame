@@ -4,7 +4,9 @@ import static model.Maze.COLUMN;
 import static model.Maze.ROW;
 
 public class Main {
-
+//while loop here ?
+    // if "c" - then loop once becuase 1 cheese
+    // if "m" - dont use hidden maze
 
     public static void main(String[] args) {
         Maze m = new Maze();
