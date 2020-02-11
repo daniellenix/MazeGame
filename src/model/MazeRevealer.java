@@ -1,12 +1,8 @@
 package model;
 
-public class MazeRevealer {
-    public final char PERIMETER_WALL = '?';
-    private static final int ROW = 20;
-    private static final int COLUMN = 15;
-    public final char UNEXPLORED_SPACES = '.';
-    public final char EXPLORED_SPACES = '+';
+import static model.RecursiveBackTracker.*;
 
+public class MazeRevealer {
     private static char[][] hiddenMaze = new char[ROW][COLUMN];
 
     public void updateHiddenMaze(Cell mouseCoord){

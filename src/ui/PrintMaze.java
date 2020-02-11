@@ -1,5 +1,7 @@
 package ui;
 
+import model.*;
+
 import java.util.Scanner;
 
 import static model.RecursiveBackTracker.*;
@@ -7,10 +9,19 @@ import static model.RecursiveBackTracker.*;
 public class PrintMaze {
 
     private Scanner userInput;
-    private int currentCheese;
-    private int totalCheese = 0;
+    private int currentCheese = 0;
+    private int totalCheese = 5;
+
+    private static char[][] hiddenMaze = new char[ROW][COLUMN];
+
+    GamePlay gamePlay = new GamePlay();
+    Mouse mouse = new Mouse();
+    InputTokens inputTokens = new InputTokens();
+    Cell cell = new Cell(1, 1);
 
     public void displayMaze(char[][] hiddenMaze, char[][] maze){
+        System.out.println("Maze:");
+
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COLUMN; j++) {
                 if (maze[i][j] == PERIMETER_WALL || maze[i][j] == MOUSE || maze[i][j] == CHEESE ||
@@ -24,63 +35,108 @@ public class PrintMaze {
         }
     }
 
+    public void testDisplay(char[][] maze) {
+        System.out.println("Maze:");
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COLUMN; j++) {
+                System.out.print(maze[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
     public void userDirection(){
 
-        userInput = new Scanner(System.in);
-        char choice = userInput.next().charAt(0);
+        gamePlay.setInitialMaze();
+        char[][] maze = gamePlay.getMaze();
 
         title();
         displayMenu();
+        System.out.println();
 
-        while(totalCheese < 5) {
-            switch(choice) {
-                case 'w':
-                case 'W':
-                    // move up
-//                    displayMaze();
-                    cheeseCounterDisplay();
-                    break;
-                case 'd':
-                case 'D':
-                    // move right
-//                    displayMaze();
-                    cheeseCounterDisplay();
-                    break;
-                case 's':
-                case 'S':
-                    // move down
-//                    displayMaze();
-                    cheeseCounterDisplay();
-                    break;
-                case 'a':
-                case 'A':
-                    // move left
-//                    displayMaze();
-                    cheeseCounterDisplay();
-                    break;
-                case '?':
-//                    displayMaze();
-                    cheeseCounterDisplay();
-                    break;
-                case 'm':
-                case 'M':
-//                    displayMaze();
-                    cheeseCounterDisplay();
-                    break;
-                case 'c':
-                case 'C':
-                    totalCheese = 1;
-                    System.out.print("Enter your move [WASD?]: ");
-                    break;
-                default:
-                    System.out.println("Invalid move. Please enter just A (left), S (down), D (right), or W (up).");
-                    break;
+        testDisplay(maze);
+
+        while(currentCheese != totalCheese) {
+            while(!gamePlay.didCatGetMouse(inputTokens.getCatPositions(), inputTokens.getMousePosition()) && !gamePlay.didMouseGetCheese(inputTokens.getCheesePosition(), inputTokens.getMousePosition())) {
+
+                userInput = new Scanner(System.in);
+                char choice = userInput.next().charAt(0);
+
+                    switch(choice) {
+                        case 'w':
+                        case 'W':
+                            // move up
+                            if(mouse.isValidMove(cell.getUp(cell), maze)) {
+                                inputTokens.updateMouseAndMaze(cell.getUp(cell), maze);
+                                inputTokens.updateCatsAndMaze(maze);
+                                cheeseCounterDisplay();
+                            } else {
+                                System.out.println("Invalid move: you cannot move through walls!");
+                            }
+                            break;
+                        case 'd':
+                        case 'D':
+                            // move right
+                            if(mouse.isValidMove(cell.getRight(cell), maze)) {
+                                inputTokens.updateMouseAndMaze(cell.getRight(cell), maze);
+                                inputTokens.updateCatsAndMaze(maze);
+                                cheeseCounterDisplay();
+                            } else {
+                                System.out.println("Invalid move: you cannot move through walls!");
+                            }
+                            break;
+                        case 's':
+                        case 'S':
+                            // move down
+                            if(mouse.isValidMove(cell.getDown(cell), maze)) {
+                                inputTokens.updateMouseAndMaze(cell.getDown(cell), maze);
+                                inputTokens.updateCatsAndMaze(maze);
+                                cheeseCounterDisplay();
+                            } else {
+                                System.out.println("Invalid move: you cannot move through walls!");
+                            }
+                            break;
+                        case 'a':
+                        case 'A':
+                            // move left
+                            if(mouse.isValidMove(cell.getLeft(cell), maze)) {
+                                inputTokens.updateMouseAndMaze(cell.getLeft(cell), maze);
+                                inputTokens.updateCatsAndMaze(maze);
+                                cheeseCounterDisplay();
+                            } else {
+                                System.out.println("Invalid move: you cannot move through walls!");
+                            }
+                            break;
+                        case '?':
+                            displayMenu();
+                            break;
+                        case 'm':
+                        case 'M':
+                            displayMaze(hiddenMaze, maze);
+                            cheeseCounterDisplay();
+                            break;
+                        case 'c':
+                        case 'C':
+                            totalCheese = 1;
+                            System.out.print("Enter your move [WASD?]: ");
+                            break;
+                        default:
+                            System.out.println("Invalid move. Please enter just A (left), S (down), D (right), or W (up).");
+                    }
+                }
+
+            if (gamePlay.didCatGetMouse(inputTokens.getCatPositions(), inputTokens.getMousePosition())) {
+                System.out.println("I'm sorry, you have been eaten!");
+                currentCheese = totalCheese;
+            } else if (gamePlay.didMouseGetCheese(inputTokens.getCheesePosition(), inputTokens.getMousePosition())) {
+                currentCheese++;
+                System.out.println("Congratulations! You won!");
+                displayMaze(hiddenMaze, maze);
             }
         }
-
         if(currentCheese == 5) {
             System.out.println("Congratulations! You won!");
-//            displayMaze();
+            displayMaze(hiddenMaze, maze);
         }
     }
 
@@ -116,10 +172,4 @@ public class PrintMaze {
 
         System.out.println(menu);
     }
-
-    public void displayAsPlaying(){
-        System.out.println("Maze:");
-        // current state of maze
-    }
-
 }

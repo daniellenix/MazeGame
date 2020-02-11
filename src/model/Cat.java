@@ -7,7 +7,6 @@ import static model.RecursiveBackTracker.*;
 //is this where we keep track of the position the cat is on?
 
 public class Cat {
-
     private ArrayList<Cell> emptySpaces = new ArrayList<>();
     private ArrayList<Cell> newCatPositions = new ArrayList<>();
     private ArrayList<Cell> catPositions = new ArrayList<>();

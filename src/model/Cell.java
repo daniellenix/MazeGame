@@ -29,11 +29,6 @@ public class Cell {
                 column == cell.column;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(row, column);
-    }
-
     public boolean hasUpCell(Cell currentCell, char typeOfWall, char[][] maze){
         Cell upCell = getUp(currentCell);
         return maze[upCell.row][upCell.column] == typeOfWall;
@@ -93,4 +88,5 @@ public class Cell {
                 ", column = " + column +
                 ']';
     }
+
 }
