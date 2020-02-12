@@ -11,7 +11,6 @@ public class PrintMaze {
     private int currentCheese = 0;
     private int totalCheese = 5;
 
-
     private static char[][] hiddenMaze = new char[ROW][COLUMN];
 
     GamePlay gamePlay = new GamePlay();
@@ -61,7 +60,6 @@ public class PrintMaze {
             while(!gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze)) &&
                     !gamePlay.didMouseGetCheese(cheesePosition, mouse.findMousePosition(maze))) {
 
-                System.out.println("here");
                 cheeseCounterDisplay();
                 Scanner userInput = new Scanner(System.in);
                 char choice = userInput.next().charAt(0);
