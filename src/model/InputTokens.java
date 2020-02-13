@@ -44,7 +44,6 @@ public class InputTokens {
         Mouse mouse = new Mouse();
         Cell oldMousePosition = mouse.findMousePosition(maze);
         maze[userInput.getRow()][userInput.getColumn()] = MOUSE;
-        //wrong - how are we going to remember the piece the cat moves to
         maze[oldMousePosition.getRow()][oldMousePosition.getColumn()] = EMPTY_SPACE;
         mousePosition = userInput;
     }

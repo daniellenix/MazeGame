@@ -17,7 +17,7 @@ public class Mouse {
         //up
         Cell upCell = mouseCoord.getUp(mouseCoord);
         if(doesCellEqualTo(upCell, EMPTY_SPACE, maze) || doesCellEqualTo(upCell, CAT, maze) ||
-                doesCellEqualTo(upCell, MOUSE, maze)){
+                doesCellEqualTo(upCell, CHEESE, maze)){
             emptySpaces.add(upCell);
         }
         //down

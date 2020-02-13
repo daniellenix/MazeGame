@@ -3,11 +3,13 @@ package model;
 import static model.RecursiveBackTracker.*;
 
 public class MazeRevealer {
-    private static char[][] hiddenMaze = new char[ROW][COLUMN];
+    private char[][] hiddenMaze = new char[ROW][COLUMN];
 
-    public void updateHiddenMaze(Cell mouseCoord){
+    public void updateHiddenMaze(Cell mouseCoord, char[][] maze){
         Cell upCell = mouseCoord.getUp(mouseCoord);
-        hiddenMaze[upCell.getRow()][upCell.getColumn()] = EXPLORED_SPACES;
+        if(!isPerimeter(upCell, maze)){
+            hiddenMaze[upCell.getRow()][upCell.getColumn()] = EXPLORED_SPACES;
+        }
 
         Cell downCell = mouseCoord.getDown(mouseCoord);
         hiddenMaze[downCell.getRow()][downCell.getColumn()] = EXPLORED_SPACES;
@@ -31,6 +33,10 @@ public class MazeRevealer {
         hiddenMaze[upRightDiagonal.getRow()][upRightDiagonal.getColumn()] = EXPLORED_SPACES;
     }
 
+    public boolean isPerimeter(Cell cell, char[][] maze) {
+        return maze[cell.getRow()][cell.getColumn()] == PERIMETER_WALL;
+    }
+
     public void setInitialHiddenMaze(){
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COLUMN; j++) {
@@ -38,12 +44,16 @@ public class MazeRevealer {
             }
         }
         for (int i = 0; i < COLUMN; i++) {
-            hiddenMaze[0][i] = PERIMETER_WALL;
-            hiddenMaze[ROW - 1][i] = PERIMETER_WALL;
+            hiddenMaze[0][i] = WALL;
+            hiddenMaze[ROW - 1][i] = WALL;
         }
         for (int i = 0; i < ROW; i++) {
-            hiddenMaze[i][0] = PERIMETER_WALL;
-            hiddenMaze[i][COLUMN - 1] = PERIMETER_WALL;
+            hiddenMaze[i][0] = WALL;
+            hiddenMaze[i][COLUMN - 1] = WALL;
         }
+    }
+
+    public char[][] getHiddenMaze() {
+        return hiddenMaze;
     }
 }
