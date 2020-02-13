@@ -5,7 +5,7 @@ public class Cell {
     private int row;
     private int column;
 
-    public Cell(int row, int column) {
+    Cell(int row, int column) {
         this.row = row;
         this.column = column;
     }

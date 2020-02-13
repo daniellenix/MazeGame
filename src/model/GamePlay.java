@@ -18,7 +18,7 @@ public class GamePlay {
         inputTokens.setInitialTokens(maze);
     }
 
-    public void initializeMaze(){
+    private void initializeMaze(){
         RecursiveBackTracker mazeMaker = new RecursiveBackTracker();
 
         boolean isMazeValid = false;
@@ -35,6 +35,16 @@ public class GamePlay {
         return cheesePosition.equals(mousePosition);
     }
 
+    public static boolean didCatGetCheese(ArrayList<Cell> catPositions, Cell cheesePosition){
+        for (Cell catPosition : catPositions) {
+            if (catPosition.equals(cheesePosition)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //did cat get token
     public boolean didCatGetMouse(ArrayList<Cell> catPositions, Cell mousePosition){
         for (Cell catPosition : catPositions) {
             if (catPosition.equals(mousePosition)) {

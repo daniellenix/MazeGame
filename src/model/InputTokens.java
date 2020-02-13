@@ -6,6 +6,7 @@ import static model.RecursiveBackTracker.*;
 
 public class InputTokens {
 
+    Cat cat = new Cat();
     private Cell mousePosition = new Cell(1,1);
     private ArrayList<Cell> emptyPositions = new ArrayList<>();
 
@@ -49,7 +50,6 @@ public class InputTokens {
     }
 
     public void updateCatsAndMaze(char[][] maze) {
-        Cat cat = new Cat();
         ArrayList<Cell> catPositions = cat.getCatPositions(maze);
         ArrayList<Cell> newCatPositions = cat.getNewCatPositions(maze, catPositions);
 

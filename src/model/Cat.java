@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.Random;
 import static model.RecursiveBackTracker.*;
 
-//is this where we keep track of the position the cat is on?
-
 public class Cat {
-    private ArrayList<Cell> emptySpaces = new ArrayList<>();
+    private ArrayList<Cell> validMoves = new ArrayList<>();
     private ArrayList<Cell> newCatPositions = new ArrayList<>();
     private ArrayList<Cell> catPositions = new ArrayList<>();
+    private ArrayList<Cell> oldCatPositions = new ArrayList<>();
+
+    public void updateOldCatPositions(ArrayList<Cell> catPositions){
+        oldCatPositions.clear();
+        oldCatPositions.addAll(catPositions);
+    }
 
     public ArrayList<Cell> getCatPositions(char[][] maze){
         catPositions.clear();
@@ -25,12 +29,26 @@ public class Cat {
 
     public ArrayList<Cell> getNewCatPositions(char[][] maze, ArrayList<Cell> catPositions){
         newCatPositions.clear();
+        System.out.println("current cat position");
+        System.out.println(catPositions);
+        System.out.println("old cat position:");
+        System.out.println(oldCatPositions);
 
         for (Cell catPosition : catPositions) {
-            findEmptySpaces(catPosition, maze);
+            findValidMoves(catPosition, maze);
+            if (validMoves.size() != 1){
+                for (Cell oldCatPosition : oldCatPositions) {
+                    validMoves.remove(oldCatPosition);
+                }
+            }
             Random random = new Random();
-            newCatPositions.add(emptySpaces.get(random.nextInt(emptySpaces.size())));
+            newCatPositions.add(validMoves.get(random.nextInt(validMoves.size())));
         }
+        System.out.println("new cat position");
+        System.out.println(newCatPositions);
+        updateOldCatPositions(catPositions);
+        System.out.println("old cat position:");
+        System.out.println(oldCatPositions);
         return newCatPositions;
     }
 
@@ -38,31 +56,31 @@ public class Cat {
         return maze[cell.getRow()][cell.getColumn()] == typeOfWall;
     }
 
-    private void findEmptySpaces(Cell catCoord, char[][] maze) {
-        emptySpaces.clear();
+    private void findValidMoves(Cell catCoord, char[][] maze) {
+        validMoves.clear();
         //up
         Cell upCell = catCoord.getUp(catCoord);
         if(doesCellEqualTo(upCell, EMPTY_SPACE, maze) || doesCellEqualTo(upCell, MOUSE, maze) ||
                 doesCellEqualTo(upCell, CHEESE, maze)){
-            emptySpaces.add(upCell);
+            validMoves.add(upCell);
         }
         //down
         Cell downCell = catCoord.getDown(catCoord);
         if (doesCellEqualTo(downCell, EMPTY_SPACE, maze) || doesCellEqualTo(downCell, MOUSE, maze) ||
                 doesCellEqualTo(downCell, CHEESE, maze)){
-            emptySpaces.add(downCell);
+            validMoves.add(downCell);
         }
         //left
         Cell leftCell = catCoord.getLeft(catCoord);
         if(doesCellEqualTo(leftCell, EMPTY_SPACE, maze) || doesCellEqualTo(leftCell, MOUSE, maze) ||
                 doesCellEqualTo(leftCell, CHEESE, maze)){
-            emptySpaces.add(leftCell);
+            validMoves.add(leftCell);
         }
         //right
         Cell rightCell = catCoord.getRight(catCoord);
         if(doesCellEqualTo(rightCell, EMPTY_SPACE, maze) || doesCellEqualTo(rightCell, MOUSE, maze) ||
                 doesCellEqualTo(rightCell, CHEESE, maze)){
-            emptySpaces.add(rightCell);
+            validMoves.add(rightCell);
         }
     }
 }

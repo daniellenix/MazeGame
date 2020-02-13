@@ -46,9 +46,7 @@ public class PrintMaze {
 
     public void userDirection(){
 
-        title();
-        displayMenu();
-        System.out.println();
+        initialMenu();
 
         boolean playerIsNotDead = true;
         while(currentCheese != totalCheese && playerIsNotDead) {
@@ -189,6 +187,12 @@ public class PrintMaze {
 
         System.out.println("Cheese collected: " + currentCheese + " of " + totalCheese);
         System.out.println("GAME OVER; please try again.");
+    }
+
+    public void initialMenu() {
+        title();
+        displayMenu();
+        System.out.println();
     }
 
     private void cheeseCounterDisplay() {
