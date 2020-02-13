@@ -16,7 +16,6 @@ public class PrintMaze {
 
     Mouse mouse = new Mouse();
     InputTokens inputTokens = new InputTokens();
-//    Cell cell = new Cell(1, 1);
     Cat cat = new Cat();
 
     public void displayMaze(char[][] hiddenMaze, char[][] maze){
@@ -46,19 +45,21 @@ public class PrintMaze {
     }
 
     public void userDirection(){
-        while(currentCheese != totalCheese) {
+
+        title();
+        displayMenu();
+        System.out.println();
+
+        boolean playerIsNotDead = true;
+        while(currentCheese != totalCheese && playerIsNotDead) {
             GamePlay gamePlay = new GamePlay();
             gamePlay.setInitialMaze();
             char[][] maze = GamePlay.getMaze();
 
-            title();
-            displayMenu();
-            System.out.println();
             testDisplay(maze);
 
             Cell cheesePosition = inputTokens.getCheesePosition(maze);
-            while(!gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze)) &&
-                    !gamePlay.didMouseGetCheese(cheesePosition, mouse.findMousePosition(maze))) {
+            while(playerIsNotDead && !gamePlay.didMouseGetCheese(cheesePosition, mouse.findMousePosition(maze)) ) {
 
                 ArrayList<Cell> catPositions = cat.getCatPositions(maze);
                 Cell mousePosition = mouse.findMousePosition(maze);
@@ -75,10 +76,14 @@ public class PrintMaze {
                             inputTokens.updateMouseAndMaze(mousePosition.getUp(mousePosition), maze);
                             if (gamePlay.didCatGetMouse(catPositions, mousePosition.getUp(mousePosition))){
                                 System.out.println("I'm sorry, you have been eaten!");
-                                currentCheese = totalCheese;
+                                playerIsNotDead = false;
                             } else {
                                 inputTokens.updateCatsAndMaze(maze);
-                                mousePosition = mousePosition.getUp(mousePosition);
+//                                mousePosition.getUp(mousePosition);
+                                if (mouse.findMousePosition(maze) == null || gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze))) {
+                                    System.out.println("I'm sorry, you have been eaten!");
+                                    playerIsNotDead = false;
+                                }
                                 testDisplay(maze);
                             }
                         } else {
@@ -92,10 +97,14 @@ public class PrintMaze {
                             inputTokens.updateMouseAndMaze(mousePosition.getRight(mousePosition), maze);
                             if (gamePlay.didCatGetMouse(catPositions, mousePosition.getRight(mousePosition))){
                                 System.out.println("I'm sorry, you have been eaten!");
-                                currentCheese = totalCheese;
+                                playerIsNotDead = false;
                             } else {
                                 inputTokens.updateCatsAndMaze(maze);
-                                mousePosition = mousePosition.getRight(mousePosition);
+//                                mousePosition.getRight(mousePosition);
+                                if (mouse.findMousePosition(maze) == null || gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze))) {
+                                    System.out.println("I'm sorry, you have been eaten!");
+                                    playerIsNotDead = false;
+                                }
                                 testDisplay(maze);
                             }
                         } else {
@@ -109,10 +118,14 @@ public class PrintMaze {
                             inputTokens.updateMouseAndMaze(mousePosition.getDown(mousePosition), maze);
                             if (gamePlay.didCatGetMouse(catPositions, mousePosition.getDown(mousePosition))){
                                 System.out.println("I'm sorry, you have been eaten!");
-                                currentCheese = totalCheese;
+                                playerIsNotDead = false;
                             } else {
                                 inputTokens.updateCatsAndMaze(maze);
-                                mousePosition = mousePosition.getDown(mousePosition);
+                                if (mouse.findMousePosition(maze) == null || gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze))) {
+                                    System.out.println("I'm sorry, you have been eaten!");
+                                    playerIsNotDead = false;
+                                }
+//                                mousePosition.getDown(mousePosition);
                                 testDisplay(maze);
                             }
                         } else {
@@ -124,12 +137,16 @@ public class PrintMaze {
                         // move left
                         if(mouse.isValidMove(mousePosition.getLeft(mousePosition), maze)) {
                             inputTokens.updateMouseAndMaze(mousePosition.getLeft(mousePosition), maze);
-                            if (gamePlay.didCatGetMouse(catPositions, mousePosition.getLeft(mousePosition))){
+                            if (mouse.findMousePosition(maze) == null || gamePlay.didCatGetMouse(catPositions, mousePosition.getLeft(mousePosition))){
                                 System.out.println("I'm sorry, you have been eaten!");
-                                currentCheese = totalCheese;
+                                playerIsNotDead = false;
                             } else {
                                 inputTokens.updateCatsAndMaze(maze);
-                                mousePosition = mousePosition.getLeft(mousePosition);
+                                if (gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze))) {
+                                    System.out.println("I'm sorry, you have been eaten!");
+                                    playerIsNotDead = false;
+                                }
+//                                mousePosition.getLeft(mousePosition);
                                 testDisplay(maze);
                             }
                         } else {
@@ -151,17 +168,27 @@ public class PrintMaze {
                     default:
                         System.out.println("Invalid move. Please enter just A (left), S (down), D (right), or W (up).");
                 }
+//                if (gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze))) {
+//                    System.out.println("I'm sorry, you have been eaten!");
+//                    currentCheese = totalCheese;
+//                } else if (gamePlay.didMouseGetCheese(cheesePosition, mouse.findMousePosition(maze))) {
+//                    currentCheese++;
+//                    System.out.println("Congratulations! You won!");
+//                    System.out.println();
+//                    testDisplay(maze);
+//                }
             }
 
-            if (gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze))) {
-                System.out.println("I'm sorry, you have been eaten!");
-                currentCheese = totalCheese;
-            } else if (gamePlay.didMouseGetCheese(cheesePosition, mouse.findMousePosition(maze))) {
+           if (gamePlay.didMouseGetCheese(cheesePosition, mouse.findMousePosition(maze))) {
                 currentCheese++;
                 System.out.println("Congratulations! You won!");
+                System.out.println();
                 testDisplay(maze);
             }
         }
+
+        System.out.println("Cheese collected: " + currentCheese + " of " + totalCheese);
+        System.out.println("GAME OVER; please try again.");
     }
 
     private void cheeseCounterDisplay() {
