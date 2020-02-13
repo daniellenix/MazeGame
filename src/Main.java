@@ -3,6 +3,7 @@ import model.GamePlay;
 import model.InputTokens;
 import model.Mouse;
 import ui.PrintMaze;
+import ui.PrintMaze2;
 
 import static model.RecursiveBackTracker.COLUMN;
 import static model.RecursiveBackTracker.ROW;
@@ -22,8 +23,8 @@ public class Main {
 //            System.out.println();
 //        }
 
-        PrintMaze printMaze = new PrintMaze();
-        printMaze.userDirection();
+        PrintMaze2 printMaze = new PrintMaze2();
+        printMaze.playGame();
     }
 }
 

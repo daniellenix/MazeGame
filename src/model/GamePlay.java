@@ -35,7 +35,7 @@ public class GamePlay {
         return cheesePosition.equals(mousePosition);
     }
 
-    public static boolean didCatGetCheese(ArrayList<Cell> catPositions, Cell cheesePosition){
+    public boolean didCatGetCheese(ArrayList<Cell> catPositions, Cell cheesePosition){
         for (Cell catPosition : catPositions) {
             if (catPosition.equals(cheesePosition)) {
                 return true;

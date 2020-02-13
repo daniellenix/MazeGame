@@ -29,10 +29,6 @@ public class Cat {
 
     public ArrayList<Cell> getNewCatPositions(char[][] maze, ArrayList<Cell> catPositions){
         newCatPositions.clear();
-        System.out.println("current cat position");
-        System.out.println(catPositions);
-        System.out.println("old cat position:");
-        System.out.println(oldCatPositions);
 
         for (Cell catPosition : catPositions) {
             findValidMoves(catPosition, maze);
@@ -44,11 +40,8 @@ public class Cat {
             Random random = new Random();
             newCatPositions.add(validMoves.get(random.nextInt(validMoves.size())));
         }
-        System.out.println("new cat position");
-        System.out.println(newCatPositions);
         updateOldCatPositions(catPositions);
-        System.out.println("old cat position:");
-        System.out.println(oldCatPositions);
+
         return newCatPositions;
     }
 

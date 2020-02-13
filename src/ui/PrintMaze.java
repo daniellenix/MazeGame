@@ -70,86 +70,22 @@ public class PrintMaze {
                     case 'w':
                     case 'W':
                         // move up
-                        if(mouse.isValidMove(mousePosition.getUp(mousePosition), maze)) {
-                            inputTokens.updateMouseAndMaze(mousePosition.getUp(mousePosition), maze);
-                            if (gamePlay.didCatGetMouse(catPositions, mousePosition.getUp(mousePosition))){
-                                System.out.println("I'm sorry, you have been eaten!");
-                                playerIsNotDead = false;
-                            } else {
-                                inputTokens.updateCatsAndMaze(maze);
-//                                mousePosition.getUp(mousePosition);
-                                if (mouse.findMousePosition(maze) == null || gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze))) {
-                                    System.out.println("I'm sorry, you have been eaten!");
-                                    playerIsNotDead = false;
-                                }
-                                testDisplay(maze);
-                            }
-                        } else {
-                            System.out.println("Invalid move: you cannot move through walls!");
-                        }
+                        playerIsNotDead = isPlayerIsNotDead(playerIsNotDead, gamePlay, maze, catPositions, mousePosition.getUp(mousePosition));
                         break;
                     case 'd':
                     case 'D':
                         // move right
-                        if(mouse.isValidMove(mousePosition.getRight(mousePosition), maze)) {
-                            inputTokens.updateMouseAndMaze(mousePosition.getRight(mousePosition), maze);
-                            if (gamePlay.didCatGetMouse(catPositions, mousePosition.getRight(mousePosition))){
-                                System.out.println("I'm sorry, you have been eaten!");
-                                playerIsNotDead = false;
-                            } else {
-                                inputTokens.updateCatsAndMaze(maze);
-//                                mousePosition.getRight(mousePosition);
-                                if (mouse.findMousePosition(maze) == null || gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze))) {
-                                    System.out.println("I'm sorry, you have been eaten!");
-                                    playerIsNotDead = false;
-                                }
-                                testDisplay(maze);
-                            }
-                        } else {
-                            System.out.println("Invalid move: you cannot move through walls!");
-                        }
+                        playerIsNotDead = isPlayerIsNotDead(playerIsNotDead, gamePlay, maze, catPositions, mousePosition.getRight(mousePosition));
                         break;
                     case 's':
                     case 'S':
                         // move down
-                        if(mouse.isValidMove(mousePosition.getDown(mousePosition), maze)) {
-                            inputTokens.updateMouseAndMaze(mousePosition.getDown(mousePosition), maze);
-                            if (gamePlay.didCatGetMouse(catPositions, mousePosition.getDown(mousePosition))){
-                                System.out.println("I'm sorry, you have been eaten!");
-                                playerIsNotDead = false;
-                            } else {
-                                inputTokens.updateCatsAndMaze(maze);
-                                if (mouse.findMousePosition(maze) == null || gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze))) {
-                                    System.out.println("I'm sorry, you have been eaten!");
-                                    playerIsNotDead = false;
-                                }
-//                                mousePosition.getDown(mousePosition);
-                                testDisplay(maze);
-                            }
-                        } else {
-                            System.out.println("Invalid move: you cannot move through walls!");
-                        }
+                        playerIsNotDead = isPlayerIsNotDead(playerIsNotDead, gamePlay, maze, catPositions, mousePosition.getDown(mousePosition));
                         break;
                     case 'a':
                     case 'A':
                         // move left
-                        if(mouse.isValidMove(mousePosition.getLeft(mousePosition), maze)) {
-                            inputTokens.updateMouseAndMaze(mousePosition.getLeft(mousePosition), maze);
-                            if (mouse.findMousePosition(maze) == null || gamePlay.didCatGetMouse(catPositions, mousePosition.getLeft(mousePosition))){
-                                System.out.println("I'm sorry, you have been eaten!");
-                                playerIsNotDead = false;
-                            } else {
-                                inputTokens.updateCatsAndMaze(maze);
-                                if (gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze))) {
-                                    System.out.println("I'm sorry, you have been eaten!");
-                                    playerIsNotDead = false;
-                                }
-//                                mousePosition.getLeft(mousePosition);
-                                testDisplay(maze);
-                            }
-                        } else {
-                            System.out.println("Invalid move: you cannot move through walls!");
-                        }
+                        playerIsNotDead = isPlayerIsNotDead(playerIsNotDead, gamePlay, maze, catPositions, mousePosition.getLeft(mousePosition));
                         break;
                     case '?':
                         displayMenu();
@@ -187,6 +123,27 @@ public class PrintMaze {
 
         System.out.println("Cheese collected: " + currentCheese + " of " + totalCheese);
         System.out.println("GAME OVER; please try again.");
+    }
+
+    public boolean isPlayerIsNotDead(boolean playerIsNotDead, GamePlay gamePlay, char[][] maze, ArrayList<Cell> catPositions, Cell up) {
+        if (mouse.isValidMove(up, maze)) {
+            inputTokens.updateMouseAndMaze(up, maze);
+            if (gamePlay.didCatGetMouse(catPositions, up)) {
+                System.out.println("I'm sorry, you have been eaten!");
+                playerIsNotDead = false;
+            } else {
+                inputTokens.updateCatsAndMaze(maze);
+//                                mousePosition.getUp(mousePosition);
+                if (mouse.findMousePosition(maze) == null || gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze))) {
+                    System.out.println("I'm sorry, you have been eaten!");
+                    playerIsNotDead = false;
+                }
+                testDisplay(maze);
+            }
+        } else {
+            System.out.println("Invalid move: you cannot move through walls!");
+        }
+        return playerIsNotDead;
     }
 
     public void initialMenu() {
