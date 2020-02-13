@@ -5,32 +5,46 @@ import static model.RecursiveBackTracker.*;
 public class MazeRevealer {
     private char[][] hiddenMaze = new char[ROW][COLUMN];
 
-    public void updateHiddenMaze(Cell mouseCoord, char[][] maze){
+    public void updateHiddenMaze(Cell mouseCoord, char[][] maze, char[][] hiddenMaze){
         Cell upCell = mouseCoord.getUp(mouseCoord);
         if(!isPerimeter(upCell, maze)){
             hiddenMaze[upCell.getRow()][upCell.getColumn()] = EXPLORED_SPACES;
         }
 
         Cell downCell = mouseCoord.getDown(mouseCoord);
-        hiddenMaze[downCell.getRow()][downCell.getColumn()] = EXPLORED_SPACES;
+        if(!isPerimeter(downCell, maze)){
+            hiddenMaze[downCell.getRow()][downCell.getColumn()] = EXPLORED_SPACES;
+        }
 
         Cell leftCell = mouseCoord.getLeft(mouseCoord);
-        hiddenMaze[leftCell.getRow()][leftCell.getColumn()] = EXPLORED_SPACES;
+        if(!isPerimeter(leftCell, maze)){
+            hiddenMaze[leftCell.getRow()][leftCell.getColumn()] = EXPLORED_SPACES;
+        }
 
         Cell rightCell = mouseCoord.getRight(mouseCoord);
-        hiddenMaze[rightCell.getRow()][rightCell.getColumn()] = EXPLORED_SPACES;
+        if(!isPerimeter(rightCell, maze)){
+            hiddenMaze[rightCell.getRow()][rightCell.getColumn()] = EXPLORED_SPACES;
+        }
 
         Cell upLeftDiagonal = mouseCoord.getUpLeftDiagonal(mouseCoord);
-        hiddenMaze[upLeftDiagonal.getRow()][upLeftDiagonal.getColumn()] = EXPLORED_SPACES;
+        if(!isPerimeter(upLeftDiagonal, maze)){
+            hiddenMaze[upLeftDiagonal.getRow()][upLeftDiagonal.getColumn()] = EXPLORED_SPACES;
+        }
 
         Cell downLeftDiagonal = mouseCoord.getDownLeftDiagonal(mouseCoord);
-        hiddenMaze[downLeftDiagonal.getRow()][downLeftDiagonal.getColumn()] = EXPLORED_SPACES;
+        if(!isPerimeter(downLeftDiagonal, maze)){
+            hiddenMaze[downLeftDiagonal.getRow()][downLeftDiagonal.getColumn()] = EXPLORED_SPACES;
+        }
 
         Cell downRightDiagonal = mouseCoord.getDownRightDiagonal(mouseCoord);
-        hiddenMaze[downRightDiagonal.getRow()][downRightDiagonal.getColumn()] = EXPLORED_SPACES;
+        if(!isPerimeter(downRightDiagonal, maze)){
+            hiddenMaze[downRightDiagonal.getRow()][downRightDiagonal.getColumn()] = EXPLORED_SPACES;
+        }
 
         Cell upRightDiagonal = mouseCoord.getUpRightDiagonal(mouseCoord);
-        hiddenMaze[upRightDiagonal.getRow()][upRightDiagonal.getColumn()] = EXPLORED_SPACES;
+        if(!isPerimeter(upRightDiagonal, maze)){
+            hiddenMaze[upRightDiagonal.getRow()][upRightDiagonal.getColumn()] = EXPLORED_SPACES;
+        }
     }
 
     public boolean isPerimeter(Cell cell, char[][] maze) {
