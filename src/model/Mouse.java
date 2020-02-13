@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
+import static model.InputTokens.getToken;
 import static model.RecursiveBackTracker.*;
 
 public class Mouse {
@@ -40,15 +41,7 @@ public class Mouse {
     }
 
     public Cell findMousePosition(char[][] maze){
-        for (int i = 0; i < ROW; i++) {
-            for (int j = 0; j < COLUMN; j++) {
-                if (maze[i][j] == MOUSE){
-                    return new Cell(i, j);
-                }
-            }
-        }
-        //not sure about this
-        return null;
+        return getToken(maze, MOUSE);
     }
 
     public boolean isValidMove (Cell userInput, char[][] maze) {

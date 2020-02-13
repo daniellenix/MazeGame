@@ -19,9 +19,13 @@ public class InputTokens {
     }
 
     public Cell getCheesePosition(char[][] maze) {
+        return getToken(maze, CHEESE);
+    }
+
+    public static Cell getToken(char[][] maze, char token) {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COLUMN; j++) {
-                if (maze[i][j] == CHEESE){
+                if (maze[i][j] == token){
                     return new Cell(i, j);
                 }
             }
