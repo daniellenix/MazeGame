@@ -48,20 +48,20 @@ public class Cat {
         }
         //down
         Cell downCell = catCoord.getDown(catCoord);
-        if (doesCellEqualTo(downCell, EMPTY_SPACE, maze) || doesCellEqualTo(upCell, MOUSE, maze) ||
-                doesCellEqualTo(upCell, CHEESE, maze)){
+        if (doesCellEqualTo(downCell, EMPTY_SPACE, maze) || doesCellEqualTo(downCell, MOUSE, maze) ||
+                doesCellEqualTo(downCell, CHEESE, maze)){
             emptySpaces.add(downCell);
         }
         //left
         Cell leftCell = catCoord.getLeft(catCoord);
-        if(doesCellEqualTo(leftCell, EMPTY_SPACE, maze) || doesCellEqualTo(upCell, MOUSE, maze) ||
-                doesCellEqualTo(upCell, CHEESE, maze)){
+        if(doesCellEqualTo(leftCell, EMPTY_SPACE, maze) || doesCellEqualTo(leftCell, MOUSE, maze) ||
+                doesCellEqualTo(leftCell, CHEESE, maze)){
             emptySpaces.add(leftCell);
         }
         //right
         Cell rightCell = catCoord.getRight(catCoord);
-        if(doesCellEqualTo(rightCell, EMPTY_SPACE, maze) || doesCellEqualTo(upCell, MOUSE, maze) ||
-                doesCellEqualTo(upCell, CHEESE, maze)){
+        if(doesCellEqualTo(rightCell, EMPTY_SPACE, maze) || doesCellEqualTo(rightCell, MOUSE, maze) ||
+                doesCellEqualTo(rightCell, CHEESE, maze)){
             emptySpaces.add(rightCell);
         }
     }
