@@ -20,7 +20,11 @@ public class PrintMaze {
         System.out.println("Maze:");
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COLUMN; j++) {
-                System.out.print(maze[i][j]);
+                if (maze[i][j] == PERIMETER_WALL) {
+                    System.out.print(WALL);
+                } else {
+                    System.out.print(maze[i][j]);
+                }
             }
             System.out.println();
         }
@@ -58,14 +62,15 @@ public class PrintMaze {
 
             System.out.println();
 //            revealedMazeDisplay(maze);
-            mazeRevealer.updateHiddenMaze(mouse.findMousePosition(maze), maze, hiddenMaze);
+            Cell mousePosition = mouse.findMousePosition(maze);
+            mazeRevealer.updateHiddenMaze(mousePosition, maze, hiddenMaze);
             hiddenMazeDisplay(hiddenMaze, maze);
 
             Cell cheesePosition = inputTokens.getCheesePosition(maze);
 
-            while(playerIsNotDead && !gamePlay.didMouseGetCheese(cheesePosition, mouse.findMousePosition(maze))) {
+            while(playerIsNotDead && !gamePlay.didMouseGetCheese(cheesePosition, mousePosition)) {
                 ArrayList<Cell> catPositions = cat.getCatPositions(maze);
-                Cell mousePosition = mouse.findMousePosition(maze);
+                mousePosition = mouse.findMousePosition(maze);
 
                 cheeseCounterDisplay();
                 enterMoveDisplay();
@@ -79,25 +84,25 @@ public class PrintMaze {
                     case 'W':
                         // move up
                         playerIsNotDead = isPlayerIsNotDead(playerIsNotDead, gamePlay, maze, catPositions, mousePosition.getUp(mousePosition), hiddenMaze, cheesePosition);
-                        setCheese(maze, cheesePosition, catPositions, mouse.findMousePosition(maze));
+                        setCheese(maze, cheesePosition, catPositions, mousePosition);
                         break;
                     case 'd':
                     case 'D':
                         // move right
                         playerIsNotDead = isPlayerIsNotDead(playerIsNotDead, gamePlay, maze, catPositions, mousePosition.getRight(mousePosition), hiddenMaze, cheesePosition);
-                        setCheese(maze, cheesePosition, catPositions, mouse.findMousePosition(maze));
+                        setCheese(maze, cheesePosition, catPositions, mousePosition);
                         break;
                     case 's':
                     case 'S':
                         // move down
                         playerIsNotDead = isPlayerIsNotDead(playerIsNotDead, gamePlay, maze, catPositions, mousePosition.getDown(mousePosition), hiddenMaze, cheesePosition);
-                        setCheese(maze, cheesePosition, catPositions, mouse.findMousePosition(maze));
+                        setCheese(maze, cheesePosition, catPositions, mousePosition);
                         break;
                     case 'a':
                     case 'A':
                         // move left
                         playerIsNotDead = isPlayerIsNotDead(playerIsNotDead, gamePlay, maze, catPositions, mousePosition.getLeft(mousePosition), hiddenMaze, cheesePosition);
-                        setCheese(maze, cheesePosition, catPositions, mouse.findMousePosition(maze));
+                        setCheese(maze, cheesePosition, catPositions, mousePosition);
                         break;
                     case '?':
                         displayMenu();
@@ -105,8 +110,6 @@ public class PrintMaze {
                     case 'm':
                     case 'M':
                         revealedMazeDisplay(maze);
-                        cheeseCounterDisplay();
-                        enterMoveDisplay();
                         break;
                     case 'c':
                     case 'C':
@@ -133,26 +136,28 @@ public class PrintMaze {
     }
 
 
-    public boolean isPlayerIsNotDead(boolean playerIsNotDead, GamePlay gamePlay, char[][] maze, ArrayList<Cell> catPositions, Cell cell, char[][] hiddenMaze, Cell cheesePosition) {
+    public boolean isPlayerIsNotDead(boolean playerIsNotDead, GamePlay gamePlay, char[][] maze,
+                                     ArrayList<Cell> catPositions, Cell mousePosition, char[][] hiddenMaze,
+                                     Cell cheesePosition) {
         MazeRevealer mazeRevealer = new MazeRevealer();
         Mouse mouse = new Mouse();
-        if (mouse.isValidMove(cell, maze)) {
-            inputTokens.updateMouseAndMaze(cell, maze);
-            Cell mousePosition = mouse.findMousePosition(maze);
-            if (gamePlay.didCatGetMouse(catPositions, cell)) {
+        if (mouse.isValidMove(mousePosition, maze)) {
+            inputTokens.updateMouseAndMaze(mousePosition, maze);
+            Cell currentMousePosition = mouse.findMousePosition(maze);
+            if (gamePlay.didCatGetMouse(catPositions, currentMousePosition)) {
                 System.out.println("I'm sorry, you have been eaten!");
-//                maze[mousePosition.getRow()][mousePosition.getColumn()] = DEAD;
+                maze[mousePosition.getRow()][mousePosition.getColumn()] = DEAD;
                 playerIsNotDead = false;
             } else {
                 inputTokens.updateCatsAndMaze(maze);
-                if (mouse.findMousePosition(maze) == null || gamePlay.didCatGetMouse(cat.getCatPositions(maze), mouse.findMousePosition(maze))) {
+                if (gamePlay.didCatGetMouse(cat.getCatPositions(maze), currentMousePosition)) {
                     System.out.println("I'm sorry, you have been eaten!");
-//                    maze[mousePosition.getRow()][mousePosition.getColumn()] = DEAD;
+                    maze[mousePosition.getRow()][mousePosition.getColumn()] = DEAD;
                     playerIsNotDead = false;
                 }
 //                revealedMazeDisplay(maze);
-                mazeRevealer.updateHiddenMaze(mouse.findMousePosition(maze), maze, hiddenMaze);
-                setCheese(maze, cheesePosition, catPositions, mousePosition);
+                mazeRevealer.updateHiddenMaze(currentMousePosition, maze, hiddenMaze);
+                setCheese(maze, cheesePosition, catPositions, currentMousePosition);
                 hiddenMazeDisplay(hiddenMaze, maze);
             }
         } else {
