@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import static model.RecursiveBackTracker.*;
 
+/**
+ * Handles all cat activity.
+ */
 public class Cat {
     private ArrayList<Cell> validMoves = new ArrayList<>();
     private ArrayList<Cell> newCatPositions = new ArrayList<>();
@@ -15,6 +18,7 @@ public class Cat {
         oldCatPositions.addAll(catPositions);
     }
 
+    // Adds current cat position into array
     public ArrayList<Cell> getCatPositions(char[][] maze){
         catPositions.clear();
         for (int i = 0; i < ROW; i++) {
@@ -27,6 +31,7 @@ public class Cat {
         return catPositions;
     }
 
+    // Adds new cat positions into array
     public ArrayList<Cell> getNewCatPositions(char[][] maze, ArrayList<Cell> catPositions){
         newCatPositions.clear();
 
@@ -51,25 +56,25 @@ public class Cat {
 
     private void findValidMoves(Cell catCoord, char[][] maze) {
         validMoves.clear();
-        //up
+        // Up
         Cell upCell = catCoord.getUp(catCoord);
         if(doesCellEqualTo(upCell, EMPTY_SPACE, maze) || doesCellEqualTo(upCell, MOUSE, maze) ||
                 doesCellEqualTo(upCell, CHEESE, maze)){
             validMoves.add(upCell);
         }
-        //down
+        // Down
         Cell downCell = catCoord.getDown(catCoord);
         if (doesCellEqualTo(downCell, EMPTY_SPACE, maze) || doesCellEqualTo(downCell, MOUSE, maze) ||
                 doesCellEqualTo(downCell, CHEESE, maze)){
             validMoves.add(downCell);
         }
-        //left
+        // Left
         Cell leftCell = catCoord.getLeft(catCoord);
         if(doesCellEqualTo(leftCell, EMPTY_SPACE, maze) || doesCellEqualTo(leftCell, MOUSE, maze) ||
                 doesCellEqualTo(leftCell, CHEESE, maze)){
             validMoves.add(leftCell);
         }
-        //right
+        // Right
         Cell rightCell = catCoord.getRight(catCoord);
         if(doesCellEqualTo(rightCell, EMPTY_SPACE, maze) || doesCellEqualTo(rightCell, MOUSE, maze) ||
                 doesCellEqualTo(rightCell, CHEESE, maze)){

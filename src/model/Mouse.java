@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import static model.InputTokens.getToken;
 import static model.RecursiveBackTracker.*;
 
+/**
+ * Handles all mouse activity.
+ */
 public class Mouse {
     private ArrayList<Cell> emptySpaces = new ArrayList<>();
 
@@ -12,27 +15,28 @@ public class Mouse {
         return maze[cell.getRow()][cell.getColumn()] == typeOfWall;
     }
 
+    // Finds all possible moves of the mouse
     private void findEmptySpaces(Cell mouseCoord, char[][] maze) {
         emptySpaces.clear();
-        //up
+        // Up
         Cell upCell = mouseCoord.getUp(mouseCoord);
         if(doesCellEqualTo(upCell, EMPTY_SPACE, maze) || doesCellEqualTo(upCell, CAT, maze) ||
                 doesCellEqualTo(upCell, CHEESE, maze)){
             emptySpaces.add(upCell);
         }
-        //down
+        // Down
         Cell downCell = mouseCoord.getDown(mouseCoord);
         if (doesCellEqualTo(downCell, EMPTY_SPACE, maze) || doesCellEqualTo(downCell, CAT, maze) ||
                 doesCellEqualTo(downCell, CHEESE, maze)){
             emptySpaces.add(downCell);
         }
-        //left
+        // Left
         Cell leftCell = mouseCoord.getLeft(mouseCoord);
         if(doesCellEqualTo(leftCell, EMPTY_SPACE, maze) || doesCellEqualTo(leftCell, CAT, maze) ||
                 doesCellEqualTo(leftCell, CHEESE, maze)){
             emptySpaces.add(leftCell);
         }
-        //right
+        // Right
         Cell rightCell = mouseCoord.getRight(mouseCoord);
         if(doesCellEqualTo(rightCell, EMPTY_SPACE, maze) || doesCellEqualTo(rightCell, CAT, maze) ||
                 doesCellEqualTo(rightCell, CHEESE, maze)){
@@ -44,7 +48,7 @@ public class Mouse {
         return getToken(maze, MOUSE);
     }
 
-    public boolean isValidMove (Cell userInput, char[][] maze) {
+    public boolean isValidMove(Cell userInput, char[][] maze) {
         Cell currentMouseCoord = findMousePosition(maze);
         findEmptySpaces(currentMouseCoord, maze);
         for (Cell emptySpace : emptySpaces) {

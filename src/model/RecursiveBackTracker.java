@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
+/**
+ * Generates maze using recursive back tracker algorithm.
+ */
 public class RecursiveBackTracker {
+    // Maze characters:
     public static final char EMPTY_SPACE = ' ';
     public static final char WALL = '#';
     public static final char PERIMETER_WALL = '?';
@@ -14,6 +18,7 @@ public class RecursiveBackTracker {
     public static final int ROW = 15;
     public static final int COLUMN = 20;
 
+    // Token characters:
     public static final char MOUSE = '@';
     public static final char CHEESE = '$';
     public static final char CAT = '!';
@@ -27,10 +32,12 @@ public class RecursiveBackTracker {
         return maze;
     }
 
+    // Checks that generated maze is valid
     public boolean isMazeValid() {
         return (areCornersEmpty() && !hasWallSquare(WALL) && !hasWallSquare(EMPTY_SPACE));
     }
 
+    // Checks that there are no patches of walls
     private boolean hasWallSquare(char typeOfWall) {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COLUMN; j++) {
@@ -47,6 +54,7 @@ public class RecursiveBackTracker {
         return false;
     }
 
+    // Checks if current cell has a diagonal cell
     private boolean cellHasDiagonal(Cell currentCell, char typeOfWall) {
         if (currentCell.hasUpCell(currentCell, typeOfWall, maze) && currentCell.hasRightCell(currentCell, typeOfWall, maze)){
             if (maze[currentCell.getRow() - 1][currentCell.getColumn() + 1] == typeOfWall){
@@ -78,7 +86,6 @@ public class RecursiveBackTracker {
                 maze[1][1] == EMPTY_SPACE;
     }
 
-
     public void setInitialMaze() {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COLUMN; j++) {
@@ -95,6 +102,7 @@ public class RecursiveBackTracker {
         }
     }
 
+    // Creates maze using algorithm
     public void makeMaze(){
         setInitialMaze();
 
@@ -115,6 +123,7 @@ public class RecursiveBackTracker {
             }
         }
 
+        // Creates islands in maze
         int numberOfIslands = 0;
         while (numberOfIslands != 2){
             numberOfIslands++;
@@ -155,22 +164,22 @@ public class RecursiveBackTracker {
 
     private void findNeighbours(Cell cell) {
         neighbours.clear();
-        //up
+        // Up
         Cell upCell = cell.getUp(cell);
         if(doesCellEqualTo(upCell, WALL) && numberOfAdjacentWalls(upCell, EMPTY_SPACE) == 1){
             neighbours.add(upCell);
         }
-        //down
+        // Down
         Cell downCell = cell.getDown(cell);
         if (doesCellEqualTo(downCell, WALL) && numberOfAdjacentWalls(downCell, EMPTY_SPACE) == 1){
             neighbours.add(downCell);
         }
-        //left
+        // Left
         Cell leftCell = cell.getLeft(cell);
         if(doesCellEqualTo(leftCell, WALL) && numberOfAdjacentWalls(leftCell, EMPTY_SPACE) == 1){
             neighbours.add(leftCell);
         }
-        //right
+        // Right
         Cell rightCell = cell.getRight(cell);
         if(doesCellEqualTo(rightCell, WALL) && numberOfAdjacentWalls(rightCell, EMPTY_SPACE) == 1){
             neighbours.add(rightCell);
@@ -179,22 +188,22 @@ public class RecursiveBackTracker {
 
     private int numberOfAdjacentWalls(Cell cell, char typeOfWall) {
         int counter = 0;
-        //up
+        // Up
         Cell upCell = cell.getUp(cell);
         if(doesCellEqualTo(upCell, typeOfWall)){
             counter++;
         }
-        //down
+        // Down
         Cell downCell = cell.getDown(cell);
         if (doesCellEqualTo(downCell, typeOfWall)){
             counter++;
         }
-        //left
+        // Left
         Cell leftCell = cell.getLeft(cell);
         if(doesCellEqualTo(leftCell, typeOfWall)){
             counter++;
         }
-        //right
+        // Right
         Cell rightCell = cell.getRight(cell);
         if(doesCellEqualTo(rightCell, typeOfWall)){
             counter++;
