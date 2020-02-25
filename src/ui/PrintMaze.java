@@ -90,28 +90,28 @@ public class PrintMaze {
                     case 'w':
                     case 'W':
                         // move up
-                        playerIsNotDead = isPlayerIsNotDead(playerIsNotDead, gamePlay, maze, catPositions,
+                        playerIsNotDead = isPlayerIsNotDead(true, gamePlay, maze, catPositions,
                                 mousePosition.getUp(mousePosition), hiddenMaze, cheesePosition);
                         setCheese(maze, cheesePosition, catPositions, mousePosition);
                         break;
                     case 'd':
                     case 'D':
                         // move right
-                        playerIsNotDead = isPlayerIsNotDead(playerIsNotDead, gamePlay, maze, catPositions,
+                        playerIsNotDead = isPlayerIsNotDead(true, gamePlay, maze, catPositions,
                                 mousePosition.getRight(mousePosition), hiddenMaze, cheesePosition);
                         setCheese(maze, cheesePosition, catPositions, mousePosition);
                         break;
                     case 's':
                     case 'S':
                         // move down
-                        playerIsNotDead = isPlayerIsNotDead(playerIsNotDead, gamePlay, maze, catPositions,
+                        playerIsNotDead = isPlayerIsNotDead(true, gamePlay, maze, catPositions,
                                 mousePosition.getDown(mousePosition), hiddenMaze, cheesePosition);
                         setCheese(maze, cheesePosition, catPositions, mousePosition);
                         break;
                     case 'a':
                     case 'A':
                         // move left
-                        playerIsNotDead = isPlayerIsNotDead(playerIsNotDead, gamePlay, maze, catPositions,
+                        playerIsNotDead = isPlayerIsNotDead(true, gamePlay, maze, catPositions,
                                 mousePosition.getLeft(mousePosition), hiddenMaze, cheesePosition);
                         setCheese(maze, cheesePosition, catPositions, mousePosition);
                         break;
