@@ -62,7 +62,11 @@ public class InputTokens {
 
         for (int i = 0; i < newCatPositions.size(); i++) {
             maze[newCatPositions.get(i).getRow()][newCatPositions.get(i).getColumn()] = CAT;
-            maze[catPositions.get(i).getRow()][catPositions.get(i).getColumn()] = EMPTY_SPACE;
+            Cell cell = new Cell(catPositions.get(i).getRow(), catPositions.get(i).getColumn());
+
+            if (!cat.isCellInValidMoves(cell)){
+                maze[cell.getRow()][cell.getColumn()] = EMPTY_SPACE;
+            }
         }
     }
 }

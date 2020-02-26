@@ -9,6 +9,7 @@ import static model.RecursiveBackTracker.*;
  */
 public class Cat {
     private ArrayList<Cell> validMoves = new ArrayList<>();
+
     private ArrayList<Cell> newCatPositions = new ArrayList<>();
     private ArrayList<Cell> catPositions = new ArrayList<>();
     private ArrayList<Cell> oldCatPositions = new ArrayList<>();
@@ -42,12 +43,22 @@ public class Cat {
                     validMoves.remove(oldCatPosition);
                 }
             }
+
             Random random = new Random();
             newCatPositions.add(validMoves.get(random.nextInt(validMoves.size())));
         }
         updateOldCatPositions(catPositions);
 
         return newCatPositions;
+    }
+
+    public boolean isCellInValidMoves(Cell cell){
+        for (Cell moves : newCatPositions) {
+            if (cell.equals(moves)){
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean doesCellEqualTo(Cell cell, char typeOfWall, char[][] maze){
@@ -59,25 +70,25 @@ public class Cat {
         // Up
         Cell upCell = catCoord.getUp(catCoord);
         if(doesCellEqualTo(upCell, EMPTY_SPACE, maze) || doesCellEqualTo(upCell, MOUSE, maze) ||
-                doesCellEqualTo(upCell, CHEESE, maze)){
+                doesCellEqualTo(upCell, CHEESE, maze) || doesCellEqualTo(upCell, CAT, maze)){
             validMoves.add(upCell);
         }
         // Down
         Cell downCell = catCoord.getDown(catCoord);
         if (doesCellEqualTo(downCell, EMPTY_SPACE, maze) || doesCellEqualTo(downCell, MOUSE, maze) ||
-                doesCellEqualTo(downCell, CHEESE, maze)){
+                doesCellEqualTo(downCell, CHEESE, maze) || doesCellEqualTo(downCell, CAT, maze)){
             validMoves.add(downCell);
         }
         // Left
         Cell leftCell = catCoord.getLeft(catCoord);
-        if(doesCellEqualTo(leftCell, EMPTY_SPACE, maze) || doesCellEqualTo(leftCell, MOUSE, maze) ||
-                doesCellEqualTo(leftCell, CHEESE, maze)){
+        if(doesCellEqualTo(leftCell, EMPTY_SPACE, maze) || doesCellEqualTo(downCell, MOUSE, maze) ||
+                doesCellEqualTo(leftCell, CHEESE, maze) || doesCellEqualTo(downCell, CAT, maze)){
             validMoves.add(leftCell);
         }
         // Right
         Cell rightCell = catCoord.getRight(catCoord);
         if(doesCellEqualTo(rightCell, EMPTY_SPACE, maze) || doesCellEqualTo(rightCell, MOUSE, maze) ||
-                doesCellEqualTo(rightCell, CHEESE, maze)){
+                doesCellEqualTo(rightCell, CHEESE, maze) || doesCellEqualTo(rightCell, CAT, maze)){
             validMoves.add(rightCell);
         }
     }
