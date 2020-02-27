@@ -2,8 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-import static model.RecursiveBackTracker.COLUMN;
-import static model.RecursiveBackTracker.ROW;
+import static model.RecursiveBackTracker.*;
 
 /**
  * Handles game play, and initializes the maze.
