@@ -38,7 +38,6 @@ public class RecursiveBackTracker {
     }
 
     private boolean hasWallWithPerimeter() {
-
         for (int i = 3; i < COLUMN - 1; i++) {
             if (maze[1][i - 1] == WALL && maze[1][i] == WALL) {
                 return true;
@@ -66,7 +65,7 @@ public class RecursiveBackTracker {
     }
 
     // Checks that there are no patches of walls
-    private boolean hasWallSquare(char typeOfWall) {
+    public boolean hasWallSquare(char typeOfWall) {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COLUMN; j++) {
                 if (maze[i][j] == typeOfWall){
@@ -152,17 +151,36 @@ public class RecursiveBackTracker {
         }
 
         // Creates islands in maze
-        int numberOfIslands = 0;
-        while (numberOfIslands != 20){
-            numberOfIslands++;
-            makeIsland();
-        }
+        makeIslands();
+
     }
 
     private Cell chooseRandomIsland() {
-        findSpaces(WALL, maze, walls);
+//        findSpaces(WALL, maze, walls);
+        perimeterIsland();
         Random random = new Random();
         return walls.get(random.nextInt(walls.size()));
+    }
+
+    private void perimeterIsland() {
+        walls.clear();
+
+        for (int i = 1; i < COLUMN - 1; i++) {
+            if(maze[1][i] == WALL) {
+                walls.add(new Cell(1, i));
+            }
+            if (maze[13][i] == WALL) {
+                walls.add(new Cell(13, i));
+            }
+        }
+        for (int i = 1; i < ROW - 1; i++) {
+            if(maze[i][1] == WALL) {
+                walls.add(new Cell(i, 1));
+            }
+            if (maze[i][18] == WALL) {
+                walls.add(new Cell(i, 18));
+            }
+        }
     }
 
     public static void findSpaces(char typeOfWall, char[][] maze, ArrayList<Cell> walls) {
@@ -173,6 +191,14 @@ public class RecursiveBackTracker {
                     walls.add(cell);
                 }
             }
+        }
+    }
+
+    public void makeIslands() {
+        int counter = 0;
+        while (counter != 0){
+            makeIsland();
+            counter++;
         }
     }
 
