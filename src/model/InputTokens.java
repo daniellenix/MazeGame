@@ -18,7 +18,6 @@ public class InputTokens {
     // Places initial tokens on maze
     public void setInitialTokens(char[][] maze){
         maze[ROW - 2][1] = CAT;
-        maze[ROW - 2][2] = CAT;
         maze[ROW - 2][COLUMN - 2] = CAT;
         maze[1][COLUMN - 2] = CAT;
         maze[1][1] = MOUSE;
@@ -70,5 +69,4 @@ public class InputTokens {
             }
         }
     }
-
 }

@@ -74,7 +74,7 @@ public class Cat {
         }
         // Left
         Cell leftCell = catCoord.getLeft(catCoord);
-        if(doesCellEqualTo(leftCell, EMPTY_SPACE, maze) || doesCellEqualTo(downCell, MOUSE, maze) ||
+        if(doesCellEqualTo(leftCell, EMPTY_SPACE, maze) || doesCellEqualTo(leftCell, MOUSE, maze) ||
                 doesCellEqualTo(leftCell, CHEESE, maze) || doesCellEqualTo(leftCell, CAT, maze)){
             validMoves.add(leftCell);
         }

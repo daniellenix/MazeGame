@@ -13,6 +13,7 @@ public class PrintMaze {
     private int currentCheese = 0;
     private int totalCheese = 5;
     private final char DEAD = 'X';
+    char[][] mazeLost;
 
     Mouse mouse = new Mouse();
     InputTokens inputTokens = new InputTokens();
@@ -51,6 +52,7 @@ public class PrintMaze {
 
     // Handles game play
     public void playGame() {
+
         initialMenu();
 
         boolean playerIsNotDead = true;
@@ -59,7 +61,7 @@ public class PrintMaze {
         while(currentCheese != totalCheese && playerIsNotDead) {
             GamePlay gamePlay = new GamePlay();
             gamePlay.setInitialMaze();
-            char[][] maze = GamePlay.getMaze();
+            char[][] maze = gamePlay.getMaze();
 
             MazeRevealer mazeRevealer = new MazeRevealer();
             mazeRevealer.setInitialHiddenMaze();
@@ -143,7 +145,11 @@ public class PrintMaze {
 
         // When player dies
         if (!playerIsNotDead) {
-            System.out.println("Cheese collected: " + currentCheese + " of " + totalCheese);
+            cheeseCounterDisplay();
+            System.out.println("I'm sorry, you have been eaten!");
+            System.out.println();
+            revealedMazeDisplay(mazeLost);
+            cheeseCounterDisplay();
             System.out.println("GAME OVER; please try again.");
         }
     }
@@ -213,16 +219,22 @@ public class PrintMaze {
 
             // If the mouse is eaten by the cat, display message
             if (gamePlay.didCatGetMouse(catPositions, currentMousePosition)) {
-                System.out.println("I'm sorry, you have been eaten!");
                 maze[mousePosition.getRow()][mousePosition.getColumn()] = DEAD;
+                mazeLost = gamePlay.getMaze();
+                mazeRevealer.updateHiddenMaze(currentMousePosition, maze, hiddenMaze);
+                setCheese(maze, cheesePosition, catPositions, currentMousePosition);
+                hiddenMazeDisplay(hiddenMaze, maze);
+
                 playerIsNotDead = false;
 
             } else {
-
                 inputTokens.updateCatsAndMaze(maze);
                 if (gamePlay.didCatGetMouse(cat.getCatPositions(maze), currentMousePosition)) {
-                    System.out.println("I'm sorry, you have been eaten!");
                     maze[mousePosition.getRow()][mousePosition.getColumn()] = DEAD;
+                    mazeLost = gamePlay.getMaze();
+                    mazeRevealer.updateHiddenMaze(currentMousePosition, maze, hiddenMaze);
+                    setCheese(maze, cheesePosition, catPositions, currentMousePosition);
+
                     playerIsNotDead = false;
                 }
 
