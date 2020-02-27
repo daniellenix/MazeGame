@@ -21,6 +21,7 @@ public class InputTokens {
         maze[ROW - 2][COLUMN - 2] = CAT;
         maze[1][COLUMN - 2] = CAT;
         maze[1][1] = MOUSE;
+
         Cell cheeseCell = putCheese(maze);
         maze[cheeseCell.getRow()][cheeseCell.getColumn()] = CHEESE;
     }
