@@ -32,11 +32,11 @@ public class RecursiveBackTracker {
         return maze;
     }
 
-    // Checks that generated maze is valid
     public boolean isMazeValid() {
         return (areCornersEmpty() && !hasWallSquare(WALL) && !hasWallSquare(EMPTY_SPACE) && !hasWallWithPerimeter());
     }
 
+    // checks for square of walls by perimeter
     private boolean hasWallWithPerimeter() {
         for (int i = 3; i < COLUMN - 1; i++) {
             if (maze[1][i - 1] == WALL && maze[1][i] == WALL) {
@@ -81,7 +81,6 @@ public class RecursiveBackTracker {
         return false;
     }
 
-    // Checks if current cell has a diagonal cell
     private boolean cellHasDiagonal(Cell currentCell, char typeOfWall) {
         if (currentCell.hasUpCell(currentCell, typeOfWall, maze) && currentCell.hasRightCell(currentCell, typeOfWall, maze)){
             if (maze[currentCell.getRow() - 1][currentCell.getColumn() + 1] == typeOfWall){
@@ -156,7 +155,6 @@ public class RecursiveBackTracker {
     }
 
     private Cell chooseRandomIsland() {
-//        findSpaces(WALL, maze, walls);
         perimeterIsland();
         Random random = new Random();
         return walls.get(random.nextInt(walls.size()));
@@ -218,22 +216,22 @@ public class RecursiveBackTracker {
 
     private void findNeighbours(Cell cell) {
         neighbours.clear();
-        // Up
+
         Cell upCell = cell.getUp(cell);
         if(doesCellEqualTo(upCell, WALL) && numberOfAdjacentWalls(upCell, EMPTY_SPACE) == 1){
             neighbours.add(upCell);
         }
-        // Down
+
         Cell downCell = cell.getDown(cell);
         if (doesCellEqualTo(downCell, WALL) && numberOfAdjacentWalls(downCell, EMPTY_SPACE) == 1){
             neighbours.add(downCell);
         }
-        // Left
+
         Cell leftCell = cell.getLeft(cell);
         if(doesCellEqualTo(leftCell, WALL) && numberOfAdjacentWalls(leftCell, EMPTY_SPACE) == 1){
             neighbours.add(leftCell);
         }
-        // Right
+
         Cell rightCell = cell.getRight(cell);
         if(doesCellEqualTo(rightCell, WALL) && numberOfAdjacentWalls(rightCell, EMPTY_SPACE) == 1){
             neighbours.add(rightCell);
@@ -242,22 +240,22 @@ public class RecursiveBackTracker {
 
     private int numberOfAdjacentWalls(Cell cell, char typeOfWall) {
         int counter = 0;
-        // Up
+
         Cell upCell = cell.getUp(cell);
         if(doesCellEqualTo(upCell, typeOfWall)){
             counter++;
         }
-        // Down
+
         Cell downCell = cell.getDown(cell);
         if (doesCellEqualTo(downCell, typeOfWall)){
             counter++;
         }
-        // Left
+
         Cell leftCell = cell.getLeft(cell);
         if(doesCellEqualTo(leftCell, typeOfWall)){
             counter++;
         }
-        // Right
+        
         Cell rightCell = cell.getRight(cell);
         if(doesCellEqualTo(rightCell, typeOfWall)){
             counter++;
