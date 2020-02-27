@@ -9,7 +9,7 @@ import java.util.Stack;
  */
 public class RecursiveBackTracker {
     // Maze characters:
-    public static final char EMPTY_SPACE = '.';
+    public static final char EMPTY_SPACE = ' ';
     public static final char WALL = '#';
     public static final char PERIMETER_WALL = '?';
     public static final char UNEXPLORED_SPACES = '.';
@@ -255,7 +255,7 @@ public class RecursiveBackTracker {
         if(doesCellEqualTo(leftCell, typeOfWall)){
             counter++;
         }
-        
+
         Cell rightCell = cell.getRight(cell);
         if(doesCellEqualTo(rightCell, typeOfWall)){
             counter++;
