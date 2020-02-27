@@ -15,7 +15,6 @@ public class InputTokens {
     private Cell mousePosition = new Cell(1,1);
     private ArrayList<Cell> emptyPositions = new ArrayList<>();
 
-    // Places initial tokens on maze
     public void setInitialTokens(char[][] maze){
         maze[ROW - 2][1] = CAT;
         maze[ROW - 2][COLUMN - 2] = CAT;
@@ -47,7 +46,6 @@ public class InputTokens {
         return emptyPositions.get(random.nextInt(emptyPositions.size()));
     }
 
-    // Updates the maze when mouse is moved
     public void updateMouseAndMaze(Cell userInput, char[][] maze) {
         Mouse mouse = new Mouse();
         Cell oldMousePosition = mouse.findMousePosition(maze);
@@ -56,7 +54,6 @@ public class InputTokens {
         mousePosition = userInput;
     }
 
-    // Updates the maze when cat is moved
     public void updateCatsAndMaze(char[][] maze) {
         ArrayList<Cell> catPositions = cat.getCatPositions(maze);
         ArrayList<Cell> newCatPositions = cat.getNewCatPositions(maze, catPositions);

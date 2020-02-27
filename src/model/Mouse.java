@@ -18,25 +18,25 @@ public class Mouse {
     // Finds all possible moves of the mouse
     private void findEmptySpaces(Cell mouseCoord, char[][] maze) {
         emptySpaces.clear();
-        // Up
+
         Cell upCell = mouseCoord.getUp(mouseCoord);
         if(doesCellEqualTo(upCell, EMPTY_SPACE, maze) || doesCellEqualTo(upCell, CAT, maze) ||
                 doesCellEqualTo(upCell, CHEESE, maze)){
             emptySpaces.add(upCell);
         }
-        // Down
+
         Cell downCell = mouseCoord.getDown(mouseCoord);
         if (doesCellEqualTo(downCell, EMPTY_SPACE, maze) || doesCellEqualTo(downCell, CAT, maze) ||
                 doesCellEqualTo(downCell, CHEESE, maze)){
             emptySpaces.add(downCell);
         }
-        // Left
+
         Cell leftCell = mouseCoord.getLeft(mouseCoord);
         if(doesCellEqualTo(leftCell, EMPTY_SPACE, maze) || doesCellEqualTo(leftCell, CAT, maze) ||
                 doesCellEqualTo(leftCell, CHEESE, maze)){
             emptySpaces.add(leftCell);
         }
-        // Right
+
         Cell rightCell = mouseCoord.getRight(mouseCoord);
         if(doesCellEqualTo(rightCell, EMPTY_SPACE, maze) || doesCellEqualTo(rightCell, CAT, maze) ||
                 doesCellEqualTo(rightCell, CHEESE, maze)){

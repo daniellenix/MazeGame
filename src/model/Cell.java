@@ -29,7 +29,6 @@ public class Cell {
                 column == cell.column;
     }
 
-    // Checks if current cell has a cell above it
     public boolean hasUpCell(Cell currentCell, char typeOfWall, char[][] maze){
         Cell upCell = getUp(currentCell);
         return maze[upCell.row][upCell.column] == typeOfWall;
@@ -50,7 +49,6 @@ public class Cell {
         return maze[rightCell.row][rightCell.column] == typeOfWall;
     }
 
-    // Returns cell above current cell
     public Cell getUp(Cell currentCell) {
         return new Cell(currentCell.row - 1, currentCell.column);
     }
@@ -90,5 +88,4 @@ public class Cell {
                 ", column = " + column +
                 ']';
     }
-
 }

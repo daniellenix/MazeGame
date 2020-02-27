@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 import static model.RecursiveBackTracker.*;
 
+/**
+ * Handles all cat activity.
+ */
+
 public class Cat {
     private ArrayList<Cell> validMoves = new ArrayList<>();
     private ArrayList<Cell> newCatPositions = new ArrayList<>();
@@ -60,30 +64,29 @@ public class Cat {
 
     private void findValidMoves(Cell catCoord, char[][] maze) {
         validMoves.clear();
-        // Up
+
         Cell upCell = catCoord.getUp(catCoord);
         if(doesCellEqualTo(upCell, EMPTY_SPACE, maze) || doesCellEqualTo(upCell, MOUSE, maze) ||
                 doesCellEqualTo(upCell, CHEESE, maze) || doesCellEqualTo(upCell, CAT, maze)){
             validMoves.add(upCell);
         }
-        // Down
+
         Cell downCell = catCoord.getDown(catCoord);
         if (doesCellEqualTo(downCell, EMPTY_SPACE, maze) || doesCellEqualTo(downCell, MOUSE, maze) ||
                 doesCellEqualTo(downCell, CHEESE, maze) || doesCellEqualTo(downCell, CAT, maze)){
             validMoves.add(downCell);
         }
-        // Left
+
         Cell leftCell = catCoord.getLeft(catCoord);
         if(doesCellEqualTo(leftCell, EMPTY_SPACE, maze) || doesCellEqualTo(leftCell, MOUSE, maze) ||
                 doesCellEqualTo(leftCell, CHEESE, maze) || doesCellEqualTo(leftCell, CAT, maze)){
             validMoves.add(leftCell);
         }
-        // Right
+
         Cell rightCell = catCoord.getRight(catCoord);
         if(doesCellEqualTo(rightCell, EMPTY_SPACE, maze) || doesCellEqualTo(rightCell, MOUSE, maze) ||
                 doesCellEqualTo(rightCell, CHEESE, maze) || doesCellEqualTo(rightCell, CAT, maze)){
             validMoves.add(rightCell);
         }
     }
-
 }

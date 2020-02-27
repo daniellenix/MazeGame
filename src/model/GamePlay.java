@@ -14,14 +14,12 @@ public class GamePlay {
         return maze;
     }
 
-    // Puts all tokens in maze board
     public void setInitialMaze(){
         initializeMaze();
         InputTokens inputTokens = new InputTokens();
         inputTokens.setInitialTokens(maze);
     }
 
-    // Creates the maze
     private void initializeMaze(){
         RecursiveBackTracker mazeMaker = new RecursiveBackTracker();
 
@@ -35,12 +33,10 @@ public class GamePlay {
         }
     }
 
-    // checks if mouse got the cheese
     public boolean didMouseGetCheese(Cell cheesePosition, Cell mousePosition){
         return cheesePosition.equals(mousePosition);
     }
 
-    // checks if cat got the cheese
     public boolean didCatGetCheese(ArrayList<Cell> catPositions, Cell cheesePosition){
         for (Cell catPosition : catPositions) {
             if (catPosition.equals(cheesePosition)) {
@@ -50,7 +46,6 @@ public class GamePlay {
         return false;
     }
 
-    // checks if the cat got the mouse
     public boolean didCatGetMouse(ArrayList<Cell> catPositions, Cell mousePosition){
         for (Cell catPosition : catPositions) {
             if (catPosition.equals(mousePosition)) {

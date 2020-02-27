@@ -50,7 +50,6 @@ public class MazeRevealer {
         }
     }
 
-    // Checks if cell is a wall
     public boolean isPerimeter(Cell cell, char[][] maze) {
         return maze[cell.getRow()][cell.getColumn()] == PERIMETER_WALL;
     }
