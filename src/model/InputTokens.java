@@ -4,12 +4,18 @@ import java.util.ArrayList;
 import java.util.Random;
 import static model.RecursiveBackTracker.*;
 
+/**
+ * Places all the tokens in the maze.
+ */
 public class InputTokens {
 
     Cat cat = new Cat();
+
+    // set mouse position to top left corner
     private Cell mousePosition = new Cell(1,1);
     private ArrayList<Cell> emptyPositions = new ArrayList<>();
 
+    // Places initial tokens on maze
     public void setInitialTokens(char[][] maze){
         maze[ROW - 2][1] = CAT;
         maze[ROW - 2][2] = CAT;
@@ -41,6 +47,7 @@ public class InputTokens {
         return emptyPositions.get(random.nextInt(emptyPositions.size()));
     }
 
+    // Updates the maze when mouse is moved
     public void updateMouseAndMaze(Cell userInput, char[][] maze) {
         Mouse mouse = new Mouse();
         Cell oldMousePosition = mouse.findMousePosition(maze);

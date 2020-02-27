@@ -2,6 +2,9 @@ package model;
 
 import static model.RecursiveBackTracker.*;
 
+/**
+ * Reveals the maze as the mouse is moved.
+ */
 public class MazeRevealer {
     private char[][] hiddenMaze = new char[ROW][COLUMN];
 
@@ -47,6 +50,7 @@ public class MazeRevealer {
         }
     }
 
+    // Checks if cell is a wall
     public boolean isPerimeter(Cell cell, char[][] maze) {
         return maze[cell.getRow()][cell.getColumn()] == PERIMETER_WALL;
     }
