@@ -11,8 +11,8 @@ public class RecursiveBackTracker {
     public static final char UNEXPLORED_SPACES = '.';
     public static final char EXPLORED_SPACES = '+';
 
-    public static final int ROW = 20;
-    public static final int COLUMN = 15;
+    public static final int ROW = 15;
+    public static final int COLUMN = 20;
 
     public static final char MOUSE = '@';
     public static final char CHEESE = '$';

@@ -12,6 +12,7 @@ public class InputTokens {
 
     public void setInitialTokens(char[][] maze){
         maze[ROW - 2][1] = CAT;
+        maze[ROW - 2][2] = CAT;
         maze[ROW - 2][COLUMN - 2] = CAT;
         maze[1][COLUMN - 2] = CAT;
         maze[1][1] = MOUSE;
@@ -48,13 +49,19 @@ public class InputTokens {
         mousePosition = userInput;
     }
 
+    // Updates the maze when cat is moved
     public void updateCatsAndMaze(char[][] maze) {
         ArrayList<Cell> catPositions = cat.getCatPositions(maze);
         ArrayList<Cell> newCatPositions = cat.getNewCatPositions(maze, catPositions);
 
         for (int i = 0; i < newCatPositions.size(); i++) {
             maze[newCatPositions.get(i).getRow()][newCatPositions.get(i).getColumn()] = CAT;
-            maze[catPositions.get(i).getRow()][catPositions.get(i).getColumn()] = EMPTY_SPACE;
+            Cell cell = new Cell(catPositions.get(i).getRow(), catPositions.get(i).getColumn());
+
+            if (!cat.isCellInValidMoves(cell)){
+                maze[cell.getRow()][cell.getColumn()] = EMPTY_SPACE;
+            }
         }
     }
+
 }
