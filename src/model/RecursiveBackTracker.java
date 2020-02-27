@@ -153,7 +153,7 @@ public class RecursiveBackTracker {
 
         // Creates islands in maze
         int numberOfIslands = 0;
-        while (numberOfIslands != 2){
+        while (numberOfIslands != 20){
             numberOfIslands++;
             makeIsland();
         }
