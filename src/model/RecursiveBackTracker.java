@@ -9,7 +9,7 @@ import java.util.Stack;
  */
 public class RecursiveBackTracker {
     // Maze characters:
-    public static final char EMPTY_SPACE = ' ';
+    public static final char EMPTY_SPACE = '.';
     public static final char WALL = '#';
     public static final char PERIMETER_WALL = '?';
     public static final char UNEXPLORED_SPACES = '.';
@@ -34,7 +34,35 @@ public class RecursiveBackTracker {
 
     // Checks that generated maze is valid
     public boolean isMazeValid() {
-        return (areCornersEmpty() && !hasWallSquare(WALL) && !hasWallSquare(EMPTY_SPACE));
+        return (areCornersEmpty() && !hasWallSquare(WALL) && !hasWallSquare(EMPTY_SPACE) && !hasWallWithPerimeter());
+    }
+
+    private boolean hasWallWithPerimeter() {
+
+        for (int i = 3; i < COLUMN - 1; i++) {
+            if (maze[1][i - 1] == WALL && maze[1][i] == WALL) {
+                return true;
+            }
+        }
+
+        for (int i = 3; i < COLUMN - 1; i++) {
+            if (maze[13][i - 1] == WALL && maze[13][i] == WALL) {
+                return true;
+            }
+        }
+
+        for (int i = 3; i < ROW - 1; i++) {
+            if (maze[i - 1][1] == WALL && maze[i][1] == WALL) {
+                return true;
+            }
+        }
+
+        for (int i = 3; i < ROW - 1; i++) {
+            if (maze[i - 1][18] == WALL && maze[i][18] == WALL) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Checks that there are no patches of walls
